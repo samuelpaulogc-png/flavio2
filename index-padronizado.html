@@ -1,0 +1,1401 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Flávio Magalhães · Social media designer (versão padronizada)</title>
+<meta name="description" content="Design que comunica, posiciona e vende. Critério antes da ferramenta. Social media design, direção de arte e diagnóstico de perfil em Goiânia.">
+<meta name="theme-color" content="#050505">
+<script>document.documentElement.classList.add('js')</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Playfair+Display&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --orange:#F5720E; --orange-dark:#B4520A; --black:#050505; --surface:#141414; --paper:#F0F0F0;
+  --white:#fff; --ink:#111; --muted:#8A8A8A; --border:#2A2A2A;
+  --gutter:clamp(20px,5.5vw,88px);
+  --pre-d:1.1s; /* atraso extra da entrada da Hero: o obturador da abertura abre em ~2,3 s */
+  /* escala única de títulos e textos de apoio das seções */
+  --h2:clamp(36px,4.4vw,64px);
+  --lead:clamp(17px,1.35vw,20px);
+  --ease:cubic-bezier(.16,1,.3,1);
+  --noise:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='300' height='300'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 .06 0'/></filter><rect width='300' height='300' filter='url(%23n)'/></svg>");
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+html.lenis,html.lenis body{height:auto}
+html.lenis{scroll-behavior:auto}
+.lenis.lenis-stopped{overflow:hidden}
+body{background:var(--black);color:var(--white);font-family:'Inter',sans-serif;font-size:17px;line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+button,input,select,textarea{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--orange);outline-offset:3px}
+::selection{background:var(--orange);color:var(--black)}
+/* grão de cinema sobre tudo */
+body:after{content:"";position:fixed;inset:0;background:var(--noise);pointer-events:none;z-index:90;mix-blend-mode:screen}
+
+.o{color:var(--orange)}
+.serif{font-family:'DM Serif Display',serif;font-weight:400;letter-spacing:0}
+.kicker{font-weight:600;font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--orange)}
+.paper .kicker{color:var(--orange-dark)}
+.sig{font-family:'Poppins';font-weight:300;font-size:17px;letter-spacing:-.01em}
+.sig b{font-weight:700}
+h1,h2,h3{font-family:'Poppins';font-weight:800;letter-spacing:-.025em;line-height:1}
+h2{font-size:var(--h2)}
+section{position:relative;padding:clamp(72px,11vw,150px) var(--gutter)}
+.paper{background:var(--paper) var(--noise);color:var(--ink)}
+.pill{display:inline-flex;align-items:center;gap:8px;padding:12px 22px;border-radius:999px;font-family:'Poppins';font-weight:500;font-size:15px;line-height:1;transition:transform .3s var(--ease),background .3s}
+.pill.cta{background:var(--orange);color:var(--black);font-weight:600}
+.pill.cta:hover{transform:translateY(-2px);background:#ff8a1f}
+.pill.ghost{border:1px solid rgba(255,255,255,.28)}
+.pill.ghost:hover{background:rgba(255,255,255,.1)}
+.pill i{font-style:normal;transition:transform .3s var(--ease)}
+.pill:hover i{transform:translateX(4px)}
+
+/* entrada: subida curta + fade */
+.js .rv{opacity:0;transform:translateY(24px);transition:opacity .5s var(--ease),transform .5s var(--ease);transition-delay:calc(var(--i,0)*80ms)}
+.js .rv.in{opacity:1;transform:none}
+
+/* ---------- 0 preloader: "nome que acende + obturador" (versão A, escolhida em 19/11/2026) ----------
+   FLÁVIO MAGALHÃES começa apagado e acende letra por letra com o contador, na onda de cor do Sobre
+   (apagada → laranja → branca; MAGALHÃES: apagada → branca → laranja). Uma linha laranja enche no pé.
+   No 100, uma linha laranja corta a tela ao meio e as duas metades abrem como um obturador.
+   A cena é a mesma nas duas metades (.pre-half.t / .b); cada metade mostra só a sua parte. */
+.pre{position:fixed;inset:0;z-index:100;pointer-events:none;animation:pre-hide .01s linear 1.2s forwards} /* sem JS, some sozinho */
+.js .pre{animation:none}
+.pre.gone{display:none}
+.pre-half{position:absolute;left:0;right:0;height:50%;overflow:hidden;background:var(--black);pointer-events:auto;transition:transform .95s cubic-bezier(.76,0,.24,1)}
+.pre-half.t{top:0}
+.pre-half.b{bottom:0}
+.pre-scene{position:absolute;left:0;right:0;height:100vh;height:100dvh;color:var(--white)}
+.pre-half.t .pre-scene{top:0}
+.pre-half.b .pre-scene{bottom:0}
+.pre.open .pre-half.t{transform:translateY(-101%)}
+.pre.open .pre-half.b{transform:translateY(101%)}
+.pre-corner{position:absolute;top:calc(22px + env(safe-area-inset-top,0px));font-family:'Poppins';font-weight:500;font-size:13px;line-height:1.3;letter-spacing:-.01em;color:#8f8d88;transition:opacity .25s}
+.pre-corner.l{left:var(--gutter)}
+.pre-corner.r{right:var(--gutter)}
+.pre-name{position:absolute;left:0;right:0;top:50%;transform:translateY(-50%);display:flex;justify-content:center;flex-wrap:wrap;column-gap:.28em;padding:0 20px;font-family:'Poppins';font-weight:500;font-size:clamp(40px,8.6vw,150px);line-height:.95;letter-spacing:-.045em;color:#efeeeb}
+.pre-name .w{display:inline-flex;white-space:nowrap}
+.pre-name .acc{color:var(--orange)}
+.js .pre-name [data-c]{color:rgba(240,238,233,.14)}
+.js .pre-name [data-c][data-lit]{animation:pre-wave .45s ease both}
+.js .pre-name .acc [data-c][data-lit]{animation-name:pre-wave-acc}
+@keyframes pre-wave{0%{color:rgba(240,238,233,.14)}30%{color:var(--orange)}100%{color:#efeeeb}}
+@keyframes pre-wave-acc{0%{color:rgba(240,238,233,.14)}30%{color:#efeeeb}100%{color:var(--orange)}}
+.pre-foot{position:absolute;left:var(--gutter);right:var(--gutter);bottom:calc(26px + env(safe-area-inset-bottom,0px));display:flex;align-items:flex-end;justify-content:space-between;gap:20px;transition:opacity .25s}
+.pre-track{position:relative;flex:1;height:1px;margin-bottom:.55em;background:rgba(255,255,255,.14)}
+.pre-track i{position:absolute;inset:0;background:var(--orange);transform-origin:left;transform:scaleX(var(--pp,0))}
+.pre-count{font-family:'Poppins';font-weight:400;font-size:clamp(44px,6vw,92px);line-height:.8;letter-spacing:-.04em;color:#efeeeb;font-variant-numeric:tabular-nums}
+.pre-count small{font-size:.32em;letter-spacing:0;color:var(--orange);margin-left:.08em}
+.pre-cut{position:absolute;left:0;right:0;top:50%;height:2px;margin-top:-1px;z-index:2;background:var(--orange);transform:scaleX(0);transition:transform .35s cubic-bezier(.76,0,.24,1),opacity .4s ease .5s}
+.pre.cutting .pre-cut{transform:scaleX(1)}
+.pre.open .pre-cut{opacity:0}
+.pre.cutting .pre-foot,.pre.cutting .pre-corner{opacity:0}
+@keyframes pre-hide{to{opacity:0;visibility:hidden}}
+@media (max-width:600px){.pre-name{font-size:13vw;line-height:1}} /* celular: FLÁVIO / MAGALHÃES em duas linhas */
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+
+/* onda por caractere: a letra pisca no acento e volta */
+@keyframes hw{45%{color:var(--flash,var(--orange))}}
+[data-hw]:hover .c{animation:hw .4s both;animation-delay:calc(var(--hwi)*16ms)}
+.pill.cta{--flash:#fff}
+
+/* cursor de marca */
+.cur{position:fixed;left:0;top:0;z-index:95;pointer-events:none;opacity:0;transition:opacity .3s}
+.cur.on{opacity:1}
+.cur span{display:flex;align-items:center;justify-content:center;width:12px;height:12px;margin:-6px 0 0 -6px;border-radius:999px;background:var(--orange);color:var(--black);font-family:'Poppins';font-weight:600;font-size:0;white-space:nowrap;transition:width .35s var(--ease),height .35s var(--ease),margin .35s var(--ease),font-size .2s}
+.cur.big span{width:84px;height:84px;margin:-42px 0 0 -42px;font-size:14px}
+
+/* ---------- 1 topo ---------- */
+/* o menu fica só no alto da Hero e rola junto com ela (sem barra fixa nas outras seções) */
+.top{position:absolute;top:0;left:0;right:0;z-index:50;display:flex;justify-content:flex-end;align-items:center;padding:18px var(--gutter)}
+.nav{display:flex;gap:clamp(28px,3.2vw,54px);font-family:'Poppins';font-weight:400;font-size:16px}
+.nav a{position:relative;padding:6px 0}
+.nav a:after{content:"";position:absolute;left:0;right:0;bottom:0;height:2px;background:var(--orange);transform:scaleX(0);transform-origin:left;transition:transform .3s var(--ease)}
+.nav a:hover:after{transform:scaleX(1)}
+.burger{display:none;background:none;border:1px solid rgba(255,255,255,.28);border-radius:999px;padding:9px 18px;font-family:'Poppins';font-weight:500;font-size:14px;cursor:pointer}
+
+/* ---------- 2 hero ----------
+   Prancheta de referência: 1672 × 941. A largura define a escala;
+   janelas baixas rolam sem comprimir a composição ou estreitar suas margens. */
+.top{--u:calc(100vw / 1672);padding:calc(27 * var(--u)) calc(88 * var(--u))}
+.top .sig{display:inline-flex;align-items:center;gap:.25em;font-size:calc(26.3 * var(--u));line-height:1.3;white-space:nowrap}
+.top .sig i{display:inline-block;width:calc(40 * var(--u));height:calc(3 * var(--u));margin-left:calc(14 * var(--u));background:#ff7300}
+.nav{gap:calc(54 * var(--u));font-size:calc(18.5 * var(--u));line-height:1.4}
+.hero{--u:calc(100vw / 1672);--orange:#ff7300;min-height:100svh;padding:0;display:flex;align-items:center;overflow:hidden;isolation:isolate}
+.hero-in{position:relative;width:100%;height:calc(941 * var(--u));flex:none;margin:auto}
+.hero .kicker{position:absolute;z-index:3;left:calc(88 * var(--u));top:calc(148 * var(--u));display:flex;align-items:center;gap:calc(14 * var(--u));color:var(--white);font-size:calc(17.5 * var(--u));font-weight:400;line-height:1.4;letter-spacing:.15em;white-space:nowrap}
+.hero .kicker i{display:inline-block;width:calc(16 * var(--u));height:calc(2 * var(--u));background:var(--orange)}
+.hero-stage{position:absolute;inset:0}
+.hero h1{position:absolute;left:calc(88 * var(--u));right:calc(82 * var(--u));top:calc(207 * var(--u));margin:0;font-weight:400;line-height:1}
+.hero-big{position:relative;display:block;height:calc(266 * var(--u));font-family:'Poppins',Arial,sans-serif;font-size:calc(370 * var(--u));font-weight:400;line-height:.7;letter-spacing:0;color:#ede8df}
+/* Ajustes ópticos por letra reproduzem o lettering largo do protótipo. */
+.hero-big>span{position:absolute;top:0;transform-origin:left center}
+.hero-big .letter-f{left:calc(1 * var(--u));top:calc(3 * var(--u));width:calc(201 * var(--u));height:calc(260 * var(--u));font-size:0;background:currentColor;clip-path:polygon(0 0,100% 0,100% 10.5%,17.4% 10.5%,17.4% 42%,93% 42%,93% 53%,17.4% 53%,17.4% 100%,0 100%)}
+.hero-big .letter-l{left:calc(224 * var(--u));top:calc(2 * var(--u));width:calc(147 * var(--u));height:calc(260 * var(--u));font-size:0;background:currentColor;clip-path:polygon(0 0,23.8% 0,23.8% 88%,100% 88%,100% 100%,0 100%)}
+.hero-big .letter-a{left:calc(368 * var(--u));transform:scaleX(1.086)}
+.hero-big .letter-v{left:calc(937 * var(--u));transform:scaleX(1.015)}
+.hero-big .letter-i{left:calc(1166 * var(--u))}
+.hero-big .letter-o{left:calc(1236 * var(--u));transform:scale(.965,1.045);transform-origin:left top}
+.hero-big:after{content:"";position:absolute;left:calc(488 * var(--u));top:calc(-74 * var(--u));width:calc(70 * var(--u));height:calc(54 * var(--u));background:currentColor;clip-path:polygon(44% 0,100% 0,33% 100%,0 100%)}
+.hero-sub{position:absolute;z-index:3;left:calc(86 * var(--u));top:calc(490 * var(--u));font-family:'Poppins',Arial,sans-serif;font-weight:700;font-size:calc(56 * var(--u));line-height:1;letter-spacing:.685em;color:#f15d00}
+.hero-arc,.hero-fig{position:absolute;left:0;top:0;width:100%;height:calc(941 * var(--u));max-width:none;pointer-events:none}
+.hero-arc{z-index:1;overflow:visible}
+.hero-arc path{fill:none;stroke:var(--orange);stroke-width:2.5;stroke-linecap:round;stroke-dasharray:1;stroke-dashoffset:0}
+.js .hero-arc path{stroke-dashoffset:1;transition:stroke-dashoffset 1.6s var(--ease) calc(1.9s + var(--pre-d))}
+.js .hero.ready .hero-arc path{stroke-dashoffset:0}
+.hero-fig{z-index:2;top:calc(8 * var(--u));-webkit-mask-image:linear-gradient(180deg,#000 76%,transparent 98%);mask-image:linear-gradient(180deg,#000 76%,transparent 98%);user-select:none}
+.js .hero-fig{opacity:0;transition:opacity 1.1s var(--ease) calc(1.35s + var(--pre-d))}
+.js .hero.ready .hero-fig{opacity:1}
+.hero-copy{position:absolute;z-index:3;left:calc(88 * var(--u));top:calc(595 * var(--u))}
+.hero-copy p{font-family:'Inter',Arial,sans-serif;font-weight:400;font-size:calc(29 * var(--u));line-height:1.22;letter-spacing:-.025em}
+.hero-copy hr{border:0;width:calc(60 * var(--u));height:calc(3 * var(--u));background:var(--orange);margin:calc(24 * var(--u)) 0 calc(17 * var(--u))}
+.hero-copy .serif{font-family:'Inter',Arial,sans-serif;font-weight:400;font-size:calc(36 * var(--u));line-height:1.12;letter-spacing:-.04em;color:#f1efeb}
+.hero-copy .serif em{font-style:normal;color:#bcbab5}
+/* As duas mensagens ocupam as bordas, deixando o retrato respirar. */
+@media (min-width:761px){
+  .hero .kicker{display:none}
+  .hero-arc{display:none}
+  .hero-copy{display:contents}
+  .hero-copy p,.hero-copy .serif{position:absolute;z-index:3;font-family:'Inter',Arial,sans-serif;font-weight:400;font-size:clamp(14px,1.25vw,19px);line-height:1.25;letter-spacing:-.025em}
+  .hero-copy>p:first-child{left:calc(88 * var(--u));top:clamp(78px,7vw,120px)}
+  .hero-copy .serif{right:calc(88 * var(--u));bottom:calc(135 * var(--u));text-align:right;color:#f1efeb}
+  .hero-copy hr{display:none}
+}
+/* faixa de serviços fixa no rodapé da tela (referência: barra fixa de meermohsin.me).
+   Fica fora da .hero, que isola o empilhamento; o mix-blend-mode deixa o texto branco no
+   escuro e preto sobre o cinza-papel. As marcas laranja ficam num elemento à parte, sem blend. */
+.hero-bar,.hero-ticks{--u:calc(100vw / 1672);position:fixed;z-index:60;left:calc(88 * var(--u));pointer-events:none}
+.hero-bar{right:calc(88 * var(--u));bottom:calc(41 * var(--u));display:grid;grid-template-columns:auto 1fr auto 1fr auto 1fr auto;align-items:center;font-family:'Inter',Arial,sans-serif;font-weight:500;font-size:clamp(11px,calc(15 * var(--u)),15px);line-height:1.3;letter-spacing:-.02em;text-transform:uppercase;white-space:nowrap;list-style:none;color:#fff;mix-blend-mode:difference}
+.hero-ticks{bottom:calc(89 * var(--u));width:calc(156 * var(--u));height:max(8px,calc(12 * var(--u)));background:repeating-linear-gradient(90deg,var(--orange) 0 calc(2.5 * var(--u)),transparent calc(2.5 * var(--u)) calc(6.7 * var(--u)))}
+.hero-bar .service{text-align:center}
+.hero-bar .cross{width:17px;height:17px}
+.hero-bar .cross i{display:block;width:100%;height:100%;background:linear-gradient(#fff,#fff) center/100% 1px no-repeat,linear-gradient(#fff,#fff) center/1px 100% no-repeat;will-change:transform}
+/* entrada das cruzes como na referência: de rotate(90deg) scale(0) ao normal, 1 s, power3.out;
+   depois o JS gira o traço interno (i) conforme a rolagem */
+.js .hero-bar .cross{transform:rotate(90deg) scale(0);transition:transform 1s cubic-bezier(.215,.61,.355,1);transition-delay:calc(1.6s + var(--pre-d) + var(--ci,0) * 90ms)}
+.js .hero-bar.in .cross{transform:none}
+.js .hero-bar.rv,.js .hero-ticks.rv{transition-delay:calc(1.45s + var(--pre-d))}
+.js .hero .rv{transition-delay:calc(1.45s + var(--pre-d) + var(--i,0)*80ms)}
+/* Em telas baixas, a faixa continua dentro da primeira dobra. */
+@media (min-width:761px) and (min-aspect-ratio:19/10){
+  .hero-in{height:100svh;min-height:600px}
+  .top .nav{display:none}
+  .hero .kicker{display:none}
+  .hero h1{top:26%}
+  .hero-sub{top:calc(26% + 283 * var(--u))}
+  .hero-fig,.hero-arc{left:50%;top:0;width:auto;height:100%;aspect-ratio:1672/941;transform:translateX(-50%)}
+  .hero-arc{top:7svh;-webkit-mask-image:linear-gradient(#000 75%,transparent 90%);mask-image:linear-gradient(#000 75%,transparent 90%)}
+  .hero-copy>p:first-child{top:78px}
+  .hero-copy .serif{bottom:125px}
+  .hero-bar{bottom:24px}
+  .hero-ticks{bottom:68px}
+}
+@media (min-width:761px) and (min-aspect-ratio:21/9){
+  .hero-big{font-size:calc(300 * var(--u))}
+  .hero-big .letter-f,.hero-big .letter-l{height:calc(211 * var(--u))}
+  .hero-sub{top:calc(26% + 230 * var(--u));font-size:calc(46 * var(--u))}
+}
+@media (max-width:760px){
+  .top{padding:calc(18px + env(safe-area-inset-top,0px)) max(20px,env(safe-area-inset-right,0px)) 18px max(20px,env(safe-area-inset-left,0px))}
+  .top .sig{font-size:17px}
+  .top .sig i{width:24px;height:2px;margin-left:6px}
+  /* Hero do celular (19/11/2026), composição da Hero mobile de meermohsin.me:
+     nome inteiro no alto, retrato vertical grande no centro e as duas frases no pé,
+     uma de cada lado, acima da faixa fixa. Nada se sobrepõe.
+     --nt: topo do nome · --ch: altura das maiúsculas · --ft: topo do retrato */
+  .hero{--nt:calc(84px + env(safe-area-inset-top,0px));--ch:calc((100vw - 40px) * 266 / 1170);--ft:calc(var(--nt) + var(--ch) + 46px);
+    position:relative;display:block;height:100svh;min-height:560px;padding:0}
+  .hero-in{position:absolute;inset:0;height:auto;display:block}
+  .hero-in:after{content:"";position:absolute;left:0;right:0;bottom:0;height:38%;z-index:2;pointer-events:none;background:linear-gradient(180deg,rgba(5,5,5,0),rgba(5,5,5,.88) 70%)}
+  .hero .kicker{display:none}
+  .hero-stage{position:absolute;inset:0;height:auto;margin:0}
+  /* "FLÁVIO" contínuo: no desktop o retrato ocupa o vão entre Á e V; aqui o vão sai */
+  .hero h1{--u:calc((100vw - 40px) / 1170);left:20px;right:auto;top:var(--nt);width:calc(100vw - 40px);z-index:1}
+  .hero-big .letter-v{left:calc(590 * var(--u))}
+  .hero-big .letter-i{left:calc(819 * var(--u))}
+  .hero-big .letter-o{left:calc(889 * var(--u))}
+  .hero-sub{left:20px;top:calc(var(--nt) + var(--ch) + 14px);font-size:clamp(12px,3.9vw,17px);letter-spacing:.62em}
+  .hero-arc{display:none}
+  /* o retrato encolhe em telas baixas para o queixo e a mão ficarem acima das frases */
+  .hero-fig{z-index:2;top:var(--ft);left:50%;width:min(100vw,560px,calc((100svh - var(--ft) - 132px) / .47 * .5635));height:auto;transform:translateX(-50%);
+    -webkit-mask-image:linear-gradient(#000 58%,transparent 94%);mask-image:linear-gradient(#000 58%,transparent 94%)}
+  .hero-copy{position:absolute;z-index:3;left:max(20px,env(safe-area-inset-left,0px));right:max(20px,env(safe-area-inset-right,0px));top:auto;bottom:calc(78px + env(safe-area-inset-bottom,0px));display:flex;justify-content:space-between;align-items:flex-end;gap:20px;margin:0}
+  .hero-copy p{font-size:clamp(14px,4vw,16px);line-height:1.3;letter-spacing:-.02em}
+  .hero-copy>p:first-child{max-width:52%}
+  .hero-copy hr{display:none}
+  .hero-copy .serif{font-size:clamp(14px,4vw,16px);line-height:1.3;letter-spacing:-.02em;text-align:right;color:#f1efeb}
+  .hero-bar{left:max(20px,env(safe-area-inset-left,0px));right:max(20px,env(safe-area-inset-right,0px));bottom:calc(16px + env(safe-area-inset-bottom,0px));white-space:normal;font-size:clamp(10px,2.2vw,11px);line-height:1.2;gap:4px}
+  .hero-bar .cross{width:11px;height:11px}
+  .hero-ticks{left:max(20px,env(safe-area-inset-left,0px));bottom:calc(42px + env(safe-area-inset-bottom,0px));width:88px;height:8px}
+}
+
+/* ---------- 3 apresentação (vinda de prototipo-sobre-galeria.html) ----------
+   Texto central com a onda de cor do Pamidor guiada pelo scroll e seis imagens em dois
+   triângulos espelhados, abertos para o texto:  <  texto  >                              */
+.ab{position:relative;padding:0;background:var(--black);color:#f0eee9;isolation:isolate} /* sem o padding padrão de section: as imagens usam a largura toda */
+.ab:before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;background:repeating-linear-gradient(90deg,transparent 0,transparent calc(14.2857% - 1px),rgba(255,255,255,.045) calc(14.2857% - 1px),rgba(255,255,255,.045) 14.2857%)}
+.ab-stage{position:relative;min-height:100svh;display:grid;place-items:center;padding:clamp(80px,10vw,140px) var(--gutter);overflow:hidden}
+.ab-copy{position:relative;z-index:2;max-width:min(760px,56vw);text-align:center}
+.ab-copy h2{font-family:'Poppins',Arial,sans-serif;font-weight:500;font-size:clamp(28px,3.1vw,50px);line-height:1.16;letter-spacing:-.045em}
+.ab-copy .accent{color:var(--orange)}
+.ab-copy .w{display:inline-block;white-space:nowrap}
+/* --pad é o respiro vertical da versão anterior da seção; os triângulos cabem dentro dele */
+.ab{--pad:clamp(64px,9.5vw,132px)}
+.ab-col{position:absolute;inset:0;z-index:1;pointer-events:none;--gap:2svh;
+  --ph:min(calc(10vw * 4 / 3),calc((100svh - var(--pad) * 2 - var(--gap) * 2) / 3));--pw:calc(var(--ph) * .75);
+  --outer:2.6vw;--inner:calc(var(--outer) + var(--pw) * .75)}
+.ab-pic{position:absolute;margin:0;width:var(--pw);aspect-ratio:3/4;overflow:hidden;border-radius:3px;background:#141414}
+.ab-pic img{width:100%;height:100%;object-fit:cover}
+.ab-pic.face img{object-position:50% 8%}
+.ab-pic.t{top:calc(50% - var(--ph) * 1.5 - var(--gap))}
+.ab-pic.m{top:calc(50% - var(--ph) / 2)}
+.ab-pic.b{top:calc(50% + var(--ph) / 2 + var(--gap))}
+.ab-l .t,.ab-l .b{left:var(--inner)}
+.ab-l .m{left:var(--outer);transform:translateX(calc((1 - var(--k,1)) * (var(--inner) - var(--outer))))}
+.ab-r .t,.ab-r .b{right:var(--inner)}
+.ab-r .m{right:var(--outer);transform:translateX(calc((1 - var(--k,1)) * (var(--outer) - var(--inner))))}
+@media (prefers-reduced-motion:no-preference){
+  .js .ab{height:235svh} /* 100svh + 135svh de percurso, como no Pamidor */
+  .js .ab-stage{position:sticky;top:0;height:100svh;padding:var(--pad) var(--gutter)}
+  .js .ab-col{will-change:transform}
+  .js .ab-pic{will-change:clip-path}
+  .js .ab-pic img{will-change:transform,filter}
+  /* onda de cor: o scroll define quantas letras têm [data-lit]; cada uma roda char-wave */
+  .js .ab-copy [data-c]{color:rgba(240,238,233,.17);transition:color .2s linear}
+  .js .ab-copy [data-c][data-lit]{animation:char-wave .4s ease both}
+  .js .ab-copy .accent [data-c][data-lit]{animation-name:char-wave-accent}
+}
+@keyframes char-wave{
+  0%{color:rgba(240,238,233,.17);animation-timing-function:cubic-bezier(.22,1,.36,1)}
+  30%{color:var(--orange);animation-timing-function:cubic-bezier(.55,0,1,.45)}
+  100%{color:#f0eee9}}
+@keyframes char-wave-accent{
+  0%{color:rgba(240,238,233,.17);animation-timing-function:cubic-bezier(.22,1,.36,1)}
+  30%{color:#f0eee9;animation-timing-function:cubic-bezier(.55,0,1,.45)}
+  100%{color:var(--orange)}}
+/* telas estreitas ou mais altas que largas: os triângulos viram ^ acima e v abaixo do texto */
+@media (max-width:960px), (max-aspect-ratio:5/4){
+  .ab-copy{max-width:min(640px,100%)}
+  .ab-copy h2{font-size:clamp(21px,min(6.6vw,4.6svh),34px)}
+  .ab-col{--pw:min(22vw,13svh);--dip:calc(var(--pw) * .4 * var(--k,1))}
+  .ab-pic.t,.ab-pic.m,.ab-pic.b{top:auto;bottom:auto;left:auto;right:auto;transform:none}
+  .ab-l .t{left:var(--gutter);top:calc(var(--pad) + var(--dip))}
+  .ab-l .m{left:calc(50% - var(--pw) / 2);top:var(--pad)}
+  .ab-l .b{right:var(--gutter);top:calc(var(--pad) + var(--dip))}
+  .ab-r .t{left:var(--gutter);bottom:calc(var(--pad) + var(--dip))}
+  .ab-r .m{left:calc(50% - var(--pw) / 2);bottom:var(--pad)}
+  .ab-r .b{right:var(--gutter);bottom:calc(var(--pad) + var(--dip))}
+}
+@media (max-width:760px){
+  .ab{--pad:clamp(44px,8vh,76px)} /* respiro do celular */
+  /* Celular (19/11/2026): as fileiras de imagens deixam de grudar nas bordas da tela e passam a
+     acompanhar o texto, sempre a uma distância fixa dele (^ em cima, texto, v embaixo).
+     O conjunto fica centralizado, acima da faixa fixa de serviços. O espaço Hero → Sobre é
+     ajustado no JS (abGap): 84 px, metade dos 168 px das outras seções, a pedido do usuário. */
+  .ab-stage,.js .ab-stage{display:flex;flex-direction:column;justify-content:center;align-items:stretch;gap:clamp(22px,3.6svh,30px); /* stretch: as fileiras ocupam a largura toda */
+    padding:16px var(--gutter) calc(72px + env(safe-area-inset-bottom,0px))}
+  .ab-col{--pw:min(22vw,11svh);position:relative;inset:auto;flex:none;height:calc(var(--pw) * 4 / 3 + var(--pw) * .4)} /* altura da capa + o maior desnível; 11svh para caber em telas baixas */
+  .ab-l{order:1}.ab-copy{order:2}.ab-r{order:3}
+  .ab-l .t,.ab-l .b{top:var(--dip);bottom:auto}
+  .ab-l .m{top:0;bottom:auto}
+  .ab-r .t,.ab-r .b{top:auto;bottom:var(--dip)}
+  .ab-r .m{top:auto;bottom:0}
+  .ab-l .t,.ab-r .t{left:0}.ab-l .b,.ab-r .b{right:0} /* o respiro lateral já vem do padding da área fixa */
+}
+.cap{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--muted);margin-top:10px;letter-spacing:.02em;text-transform:uppercase}
+
+/* ---------- 5 projetos · espelho do "Selected Projects" de pamidordesign.co (26/11/2026) ----------
+   Lido no código da página (1360 × 680): lista-sanfona de altura fixa (606 px = 270 + 3 × 112); a linha ativa tem
+   min-height 270 e as outras 112, com transição de 0,5 s; na ativa o nome fica na cor de destaque, aparece o botão
+   "Jump To Project" (borda, seta que gira −45° no hover), os detalhes surgem sob o nome e a capa 3:2 de 330 × 220
+   aparece à direita (opacidade 0 → 1); no hover da capa sobe um degradê com etiquetas. Lá a ativa muda pelo mouse.
+   Aqui: fundo preto, destaque laranja, detalhes só com dados reais (serviço e descrição) e, a pedido do usuário,
+   uma TRAVA: a seção fica presa e cada gesto abre o projeto seguinte; só depois do 4º a página continua.
+   O mouse ainda abre qualquer projeto para espiar (ao sair, volta ao projeto da rolagem). */
+.pp{--u:1;--n:4;padding:0;background:var(--black)}
+/* --u = a unidade da referência (lá, --px): toda medida abaixo é o valor do Pamidor em 1360 px × --u (JS) */
+.pp-head{padding:0 var(--gutter);margin-bottom:var(--pp-hm,24px)}
+.pp-head h2{font-weight:500;letter-spacing:-.035em;color:#efeeeb}
+.pp-stage{position:relative;padding:0 var(--gutter)}
+.pp-hr{height:1.5px;background:rgba(239,238,235,.16)}
+.pp-list{list-style:none;border-top:1.5px solid rgba(239,238,235,.16)}
+.pp-item{position:relative;overflow:hidden}
+.pp-a{display:block;padding:24px 0}
+.pp-grid{display:grid;grid-template-columns:1fr;align-items:start}
+.pp-l{min-width:0;position:relative}
+.pp-row{display:flex;flex-direction:column;align-items:flex-start;gap:16px}
+.pp-nm{font-family:'Poppins';font-weight:500;font-size:clamp(28px,7.4vw,40px);line-height:1.05;letter-spacing:-.015em;color:#efeeeb;opacity:.45;transition:color .3s,opacity .3s}
+.pp-item.on .pp-nm{color:var(--orange);opacity:1}
+.pp-btn{display:inline-flex;align-items:center;gap:12px;flex-shrink:0;padding:9px 15px;border:1px solid rgba(239,238,235,.25);font-size:15px;font-weight:500;line-height:1.5;letter-spacing:-.01em;color:#efeeeb;opacity:.45;transition:opacity .3s,background-color .3s,color .3s,border-color .3s}
+.pp-item.on .pp-btn{opacity:1;border-color:#efeeeb}
+.pp-btn svg{width:16px;height:16px;flex-shrink:0;transition:transform .3s cubic-bezier(.22,1,.36,1)}
+.pp-btn:hover{background:#efeeeb;color:var(--black);border-color:#efeeeb}
+.pp-btn:hover svg{transform:rotate(-45deg)}
+.pp-dl{display:none}
+.pp-dl dt{font-size:11px;line-height:1.4;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.pp-dl dd{margin-top:4px;font-size:15px;line-height:1.55;letter-spacing:-.01em;color:#efeeeb;white-space:nowrap}
+.pp-cover{position:relative;display:block;margin-top:24px;aspect-ratio:16/10;width:100%;overflow:hidden}
+.pp-cover img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.pp-over{position:absolute;inset:0;display:none;flex-direction:column;justify-content:flex-end;opacity:0;transition:opacity .3s;background:linear-gradient(180deg,rgba(4,4,4,0) 19%,rgba(4,4,4,.94) 100%)}
+.pp-chips{display:flex;flex-wrap:wrap;gap:7px;padding:14px;transform:translateY(6px);transition:transform .3s cubic-bezier(.22,1,.36,1)}
+.pp-chips span{padding:9px;border:1px solid rgba(255,255,255,.2);background:rgba(20,20,20,.7);font-size:11px;line-height:1;letter-spacing:-.01em;color:#fff}
+.pp-cover:hover .pp-over{opacity:1}
+.pp-cover:hover .pp-chips{transform:none}
+@media (min-width:1024px){
+  .pp-list{display:flex;flex-direction:column;height:calc((270px + (var(--n) - 1) * 112px) * var(--u) + 1.5px)} /* 4 linhas: 606 px, como lá */
+  .pp-item{display:flex;flex:1;flex-direction:column;min-height:calc(112px * var(--u));transition:min-height .5s cubic-bezier(.22,1,.36,1)}
+  .pp-item.on{min-height:calc(270px * var(--u))}
+  .pp-a{padding:calc(24px * var(--u)) 0}
+  .pp-grid{grid-template-columns:1fr calc(330px * var(--u));column-gap:40px}
+  .pp-row{flex-direction:row;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px 24px}
+  .pp-nm{font-size:calc(56px * var(--u))}
+  .pp-btn{font-size:max(13px,calc(15px * var(--u)));padding:calc(9px * var(--u)) calc(15px * var(--u))}
+  .pp-dl{display:flex;position:absolute;left:0;top:100%;margin-top:calc(28px * var(--u));max-width:100%;flex-wrap:wrap;gap:8px calc(48px * var(--u));opacity:0;transform:translateY(12px);transition:opacity .5s cubic-bezier(.22,1,.36,1),transform .5s cubic-bezier(.22,1,.36,1)}
+  .pp-dl dt{font-size:max(10px,calc(11.2px * var(--u)))}
+  .pp-dl dd{font-size:max(13px,calc(15px * var(--u)))}
+  .pp-item.on .pp-dl{opacity:1;transform:none}
+  .pp-c{grid-column:2;opacity:0;transition:opacity .5s cubic-bezier(.22,1,.36,1)}
+  .pp-item.on .pp-c{opacity:1}
+  .pp-cover{margin-top:0;aspect-ratio:3/2;width:calc(330px * var(--u))}
+  .pp-over{display:flex}
+  .pp-item .pp-hr{position:absolute;left:0;right:0;bottom:0}
+}
+/* celular: lista empilhada como a do Pamidor no celular (375 px): 32 px em cima e embaixo de cada item, nome de 26 px
+   sem apagar, botão de 48 px sempre visível (borda a 25%; inteira no item em destaque) e a capa em largura total, 16:10,
+   24 px abaixo (o mesmo tamanho de lá; a imagem é cortada pelo centro, a pedido do usuário). */
+@media (max-width:1023px){
+  .pp-a{padding:32px 0}
+  .pp-nm{font-size:clamp(26px,7.4vw,32px);opacity:1}
+  .pp-btn{min-height:48px;opacity:1}
+  .pp-cover{margin-top:24px;aspect-ratio:16/10}
+}
+/* trava (html.pp-pin): o título rola; a lista fica presa e cada gesto abre o projeto seguinte */
+.pp-pin .pp-track{position:relative;height:calc(100svh + (var(--n) - 1) * 60svh)}
+.pp-pin .pp-stage{position:sticky;top:0;height:100svh;overflow:hidden;padding-top:var(--pp-top,24px)}
+.pp-pin .pp{margin-bottom:var(--pp-mb,0px)}
+html:not(.pp-pin) .pp{padding-bottom:var(--pp-pb,0px)}
+
+/* ---------- 6 laboratório ----------
+   Lista horizontal por padrão (celular, movimento reduzido, sem JS). Com html.lab-pin, a
+   seção fica fixa e as seis capas formam um anel 3D que gira com a rolagem: a capa da frente
+   fica em cor, as laterais em P&B; à esquerda os créditos da cena, à direita o índice.      */
+.lab{padding:0;background:var(--black)}
+.lab-head{position:relative;z-index:3;display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap;padding:clamp(72px,11vw,150px) var(--gutter) 0;margin-bottom:clamp(32px,5vw,64px)}
+/* depois do carrossel de Projetos, o último cartão já deixa 25svh livres embaixo; o restante
+   completa o mesmo espaço Hero → Sobre e Sobre → Projetos */
+.pw-pin .lab-head{padding-top:3.4svh}
+@media (max-width:800px){ .pw-pin .lab-head{padding-top:0} } /* no celular o texto do último projeto já fica abaixo do cartão */
+.lab-head p{max-width:420px;color:rgba(255,255,255,.82);font-size:var(--lead);text-wrap:balance}
+.lab-stage{position:relative;padding-bottom:clamp(72px,11vw,150px)}
+.lab-ring{display:flex;gap:clamp(12px,1.6vw,22px);overflow-x:auto;padding:0 var(--gutter);scroll-snap-type:x mandatory;scroll-padding:0 var(--gutter);scrollbar-width:none}
+.lab-ring::-webkit-scrollbar{display:none}
+.lab-card{flex:0 0 min(62vw,300px);margin:0;scroll-snap-align:start}
+.lab-card img{width:100%;aspect-ratio:3/4;object-fit:cover;border-radius:4px;background:var(--surface);user-select:none;-webkit-user-drag:none}
+.lab-card .cap{display:flex;justify-content:space-between;gap:12px}
+.lab-card .cap span:first-child{color:var(--orange)}
+.lab-credit,.lab-index{display:none}
+.lab-more{padding:clamp(28px,4vw,44px) var(--gutter) 0}
+
+/* modo fixo (desktop com movimento): JS adiciona html.lab-pin e define --lc-w, --lc-h e --lc-r */
+.lab-pin .lab-track{height:calc(100svh + (var(--lab-n,6) - 1) * 40svh)}
+.lab-pin .lab-stage{position:sticky;top:0;height:100svh;padding:0;overflow:hidden}
+.lab-pin .lab-stage:before{content:"";position:absolute;inset:0;pointer-events:none;background:repeating-linear-gradient(90deg,transparent 0,transparent calc(14.2857% - 1px),rgba(255,255,255,.045) calc(14.2857% - 1px),rgba(255,255,255,.045) 14.2857%)}
+/* a capa da frente fica centralizada; a margem negativa traz o palco para baixo do título,
+   deixando entre o título e a capa o mesmo espaço título → conteúdo das outras seções       */
+.lab-pin .lab-head{margin-bottom:calc(clamp(32px,5vw,64px) - (100svh - var(--lc-h,56svh)) / 2)}
+.lab-pin .lab-ring-wrap{position:absolute;inset:0;perspective:calc(var(--lc-w,300px) * 3.6);perspective-origin:50% 50%}
+.lab-pin .lab-ring{position:absolute;left:50%;top:50%;display:block;width:var(--lc-w);height:var(--lc-h);margin:calc(var(--lc-h) / -2) 0 0 calc(var(--lc-w) / -2);padding:0;overflow:visible;transform-style:preserve-3d;will-change:transform}
+.lab-pin .lab-card{position:absolute;inset:0;transform:rotateY(calc(var(--ci) * 360deg / var(--lab-n,6))) translateZ(var(--lc-r));-webkit-backface-visibility:hidden;backface-visibility:hidden}
+.lab-pin .lab-card img{height:100%;aspect-ratio:auto;box-shadow:0 40px 90px rgba(0,0,0,.5);will-change:filter}
+.lab-pin .lab-card .cap{display:none}
+.lab-pin .lab-credit{display:block;position:absolute;z-index:5;left:var(--gutter);top:50%;transform:translateY(-50%);width:min(320px,var(--lc-side))}
+.lab-num{font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.06em;color:var(--muted)}
+.lab-num b{font-weight:500;color:var(--white)}
+.lab-set{font-family:'Poppins';font-weight:500;font-size:clamp(20px,1.9vw,34px);letter-spacing:-.02em;line-height:1.05;text-transform:uppercase;margin:14px 0 16px}
+.lab-line{font-size:15px;line-height:1.5;color:#cfcfcf}
+/* palavras entram de baixo em sequência, como nos cartões de Projetos */
+.lab-credit .w{display:inline-block;transform:translateY(40px);opacity:0}
+.lab-credit.in .w{transform:none;opacity:1;transition:transform .45s cubic-bezier(.25,.46,.45,.94),opacity .45s cubic-bezier(.25,.46,.45,.94);transition-delay:calc(var(--wd,0ms) + var(--wi) * var(--ws,35ms))}
+.lab-line{--wd:160ms;--ws:14ms}
+.lab-pin .lab-side{position:absolute;z-index:5;right:var(--gutter);top:50%;transform:translateY(-50%);width:min(240px,var(--lc-side))}
+.lab-pin .lab-index{display:block;list-style:none;border-top:1px solid rgba(255,255,255,.12)}
+.lab-index button{display:flex;align-items:baseline;gap:14px;width:100%;padding:10px 0;background:none;border:0;border-bottom:1px solid rgba(255,255,255,.12);font-family:'Poppins';font-size:15px;text-align:left;color:rgba(255,255,255,.42);cursor:pointer;transition:color .3s}
+.lab-index button span{font-family:'JetBrains Mono',monospace;font-size:11px;transition:color .3s}
+.lab-index button:hover{color:rgba(255,255,255,.8)}
+.lab-index button.on{color:var(--white)}
+.lab-index button.on span{color:var(--orange)}
+.lab-pin .lab-more{padding:28px 0 0}
+.lab-more .pill{white-space:nowrap}
+.lab-bars{display:none}
+/* celular (25/11/2026, protótipo A escolhido): o mesmo anel, com html.lab-mob além de html.lab-pin.
+   A capa fica no alto (--lab-rt), o anel recuado deixa a da frente no tamanho real e as vizinhas aparecem
+   nas bordas; embaixo, os créditos da cena, 6 segmentos de progresso e o botão em largura total. */
+.lab-mob .lab-track{height:calc(100svh + (var(--lab-n,6) - 1) * 45svh)}
+.lab-mob .lab-stage:before{background:repeating-linear-gradient(90deg,transparent 0,transparent calc(25% - 1px),rgba(255,255,255,.045) calc(25% - 1px),rgba(255,255,255,.045) 25%)}
+.lab-mob .lab-head{margin-bottom:calc(clamp(32px,5vw,64px) - var(--lab-rt,48px))}
+.lab-mob .lab-ring-wrap{inset:auto;left:0;right:0;top:var(--lab-rt,48px);height:var(--lc-h)}
+.lab-mob .lab-ring{top:0;margin:0 0 0 calc(var(--lc-w) / -2)}
+.lab-mob .lab-card img{border-radius:4px;box-shadow:0 30px 70px rgba(0,0,0,.55)}
+.lab-mob .lab-credit{left:var(--gutter);right:var(--gutter);width:auto;top:calc(var(--lab-rt,48px) + var(--lc-h) + 22px);transform:none}
+.lab-mob .lab-set{font-size:24px;margin:12px 0 8px;min-height:1.05em}
+.lab-mob .lab-line{min-height:2.9em}
+.lab-mob .lab-num b{color:var(--orange)}
+.lab-mob .lab-bars{display:grid;grid-template-columns:repeat(6,1fr);gap:4px;margin-top:16px}
+.lab-bars i{position:relative;height:2px;background:rgba(255,255,255,.14);overflow:hidden}
+.lab-bars i:after{content:"";position:absolute;inset:0;background:var(--orange);transform-origin:left;transform:scaleX(var(--f,0))}
+.lab-mob .lab-side{left:var(--gutter);right:var(--gutter);width:auto;top:auto;bottom:calc(72px + env(safe-area-inset-bottom,0px));transform:none}
+.lab-mob .lab-index{display:none}
+.lab-mob .lab-more{padding:0}
+.lab-mob .lab-more .pill{display:flex;justify-content:space-between;min-height:54px;padding:6px 6px 6px 22px}
+.lab-mob .lab-more .pill i{width:42px;height:42px;flex:0 0 42px;border-radius:50%;font-size:0;color:transparent;background:#101111 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23fff' stroke-width='1.6'%3E%3Cpath d='M5 12h14m-6-6 6 6-6 6'/%3E%3C/svg%3E") center/20px no-repeat}
+html.lab-mob .sk{padding-top:0} /* fim do botão → título de Serviços = 96 px (medido), como as outras seções do celular */
+
+/* ---------- 7 serviços · mesma sanfona do Projetos (classes .pp-*, 3 linhas) (26/11/2026) ----------
+   Antes: espelho do "Skillset" do Pamidor (5 colunas + capa que seguia o cursor), guardado em .preview.
+   harmonia: Laboratório → título e fim da lista → Contato medem 28,4svh (193 px em 1360 × 680),
+   como Hero → Sobre → Projetos → Laboratório. --lab-tail é o espaço livre sob a capa do anel (JS). */
+.sk.pp{padding-top:clamp(72px,11vw,150px)}
+.sk{padding-bottom:max(24px,calc(28.4svh - var(--ct-top,150px)))} /* --ct-top: topo do título do Contato (JS) */
+.lab-pin .sk{padding-top:max(24px,calc(28.4svh - var(--lab-tail,150px)))}
+.pp-pin .sk.pp{padding-bottom:0} /* com a trava, o espaço até o Contato vem do --pp-mb (JS) */
+.paper .todo{background:rgba(180,82,10,.14);color:var(--orange-dark)}
+
+/* ---------- 8 contato ----------
+   26/11/2026: o Flávio sai do fundo e entra num retângulo estilizado (retrato 4:5 da pasta "FOTOS FLAVIO",
+   "Retrato Masculino em Gradiente Laranja", em assets/contato-retrato.webp): moldura fina deslocada atrás, com as
+   cruzes da faixa de serviços nos cantos, e uma legenda em mono. Fundo da seção: o preto do site, sem degradê.
+   Entrada (classe .in, JS): a foto sobe como cortina e sai de um zoom, a moldura aparece, as letras do título acendem
+   em cascata, o texto sobe e o botão acende. (A versão com o fundo está em .preview/index-padronizado-contato-fundo-2026-11-26.html.) */
+.ct{position:relative;height:100svh;min-height:560px;padding:0;overflow:hidden;isolation:isolate;--ct-cream:#efeeeb;--ct-off:18px}
+/* retrato: 34% da largura (ainda livre do título) e 58% da altura da tela, à direita, num recorte mais largo que o 4:5
+   ("no desktop ela pode ocupar um pouco mais da largura"); o conjunto (foto + moldura deslocada + legenda, 50 px abaixo
+   da foto) fica centrado na mesma altura do texto e termina acima da faixa fixa de serviços */
+.ct-card{margin:0;position:absolute;z-index:2;right:calc(var(--gutter) + var(--ct-off));top:50%;width:min(34vw,620px);transform:translateY(calc(-50% - 25px))}
+.ct-frame{position:absolute;inset:0;transform:translate(var(--ct-off),var(--ct-off));border:1px solid rgba(239,238,235,.22);opacity:0;transition:opacity .8s ease .5s}
+.ct-frame i{position:absolute;width:13px;height:13px;margin:-7px 0 0 -7px}
+.ct-frame i:before,.ct-frame i:after{content:"";position:absolute;background:rgba(239,238,235,.7)}
+.ct-frame i:before{left:6px;top:0;width:1px;height:13px}
+.ct-frame i:after{left:0;top:6px;width:13px;height:1px}
+.ct-frame i:nth-child(1){left:0;top:0}.ct-frame i:nth-child(2){left:100%;top:0}
+.ct-frame i:nth-child(3){left:0;top:100%}.ct-frame i:nth-child(4){left:100%;top:100%}
+.ct-pic{position:relative;height:min(58svh,560px);overflow:hidden;background:#1a1a1a;clip-path:inset(100% 0 0 0);transition:clip-path 1.1s var(--ease)}
+.ct-pic img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 28%;transform:scale(1.12);transition:transform 1.6s var(--ease)}
+.ct-cap{position:absolute;right:calc(-1 * var(--ct-off));top:calc(100% + var(--ct-off) + 14px);text-align:right;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);white-space:nowrap;opacity:0;transition:opacity .8s ease .7s}
+.ct.in .ct-pic{clip-path:inset(0 0 0 0)}
+.ct.in .ct-pic img{transform:none}
+.ct.in .ct-frame,.ct.in .ct-cap{opacity:1}
+.ct-copy{position:absolute;z-index:4;left:var(--gutter);top:50%;transform:translateY(-50%);width:min(62vw,980px)}
+.ct .ct-title{font:400 clamp(40px,5.6vw,100px)/1 Poppins,Arial,sans-serif;letter-spacing:-.05em}
+.ct-title .ln{display:block;width:max-content;white-space:nowrap}
+.ct-title [data-c]{color:rgba(240,238,233,.12)}
+.ct-title [data-c][data-lit]{animation:ct-lit .55s ease both}
+.ct-title .acc [data-c]{font-weight:600}
+.ct-title .acc [data-c][data-lit]{animation-name:ct-lit-acc}
+@keyframes ct-lit{0%{color:rgba(240,238,233,.12);text-shadow:none}25%{color:#ffd2ad;text-shadow:0 0 24px rgba(245,114,14,.9)}60%{color:var(--orange)}100%{color:var(--ct-cream);text-shadow:none}}
+@keyframes ct-lit-acc{0%{color:rgba(240,238,233,.12)}25%{color:#ffd2ad;text-shadow:0 0 30px rgba(245,114,14,1)}100%{color:var(--orange);text-shadow:0 0 0 transparent}}
+.ct-lead{max-width:30ch;margin-top:clamp(20px,2.4vw,32px);font-size:var(--lead);line-height:1.5;color:#cfccc6}
+.ct-act{display:flex;flex-wrap:wrap;align-items:center;gap:16px 28px;margin-top:clamp(24px,3vw,40px)}
+/* entrada: apoio e botão sobem quando a seção chega */
+.ct-lead,.ct-act{opacity:0;transform:translateY(16px);transition:opacity .8s ease,transform .8s var(--ease)}
+.ct.in .ct-lead,.ct.in .ct-act{opacity:1;transform:none}
+.ct.in .ct-lead{transition-delay:.6s}
+.ct.in .ct-act{transition-delay:.75s}
+/* botão: entra com o contorno e acende (preenchimento laranja da esquerda para a direita) */
+.ct-cta{position:relative;display:inline-flex;align-items:center;gap:16px;min-height:58px;padding:8px 8px 8px 24px;border-radius:999px;border:1px solid rgba(245,114,14,.7);color:var(--ct-cream);font:500 15px/1 Poppins,Arial,sans-serif;white-space:nowrap;overflow:hidden;isolation:isolate;
+  background:linear-gradient(var(--orange),var(--orange)) no-repeat 0 0/0 100%;transition:color .25s ease,box-shadow .4s ease,background-size .7s var(--ease)}
+.ct-cta.on{background-size:100% 100%;color:var(--black);box-shadow:0 0 0 0 rgba(245,114,14,.6),0 12px 40px rgba(245,114,14,.35);animation:ct-pulse 2.4s ease-out 0s infinite}
+.ct.in .ct-cta.on{transition-delay:1s}
+@keyframes ct-pulse{0%{box-shadow:0 0 0 0 rgba(245,114,14,.55),0 12px 40px rgba(245,114,14,.35)}70%{box-shadow:0 0 0 18px rgba(245,114,14,0),0 12px 40px rgba(245,114,14,.35)}100%{box-shadow:0 0 0 0 rgba(245,114,14,0),0 12px 40px rgba(245,114,14,.35)}}
+.ct-cta .arrow{display:grid;place-items:center;width:42px;height:42px;border-radius:50%;background:#101111;color:#fff;transition:transform .45s var(--ease)}
+.ct-cta .arrow svg{width:20px;height:20px}
+@media (hover:hover) and (pointer:fine){.ct-cta.on:hover .arrow{transform:translateX(4px) rotate(-45deg)}}
+/* celular e telas em pé (21/11/2026, "o layout do mobile não tá bem organizado"): empilhado, sem sobreposição.
+   A foto vertical fica no alto, com o rosto e as mãos, e termina num degradê para o preto; o título, o apoio e o
+   botão vêm embaixo, no preto. A seção tem a altura do conteúdo, com respiro no pé para a faixa fixa de serviços. */
+@media (max-width:760px),(max-aspect-ratio:4/5){
+  .ct{height:auto;min-height:0;padding-bottom:calc(112px + env(safe-area-inset-bottom,0px));--ct-off:10px}
+  /* quase a largura toda ("no mobile quase toda a largura"): 12 px de cada lado, contando a moldura deslocada */
+  .ct-card{position:relative;right:auto;top:auto;transform:none;margin-left:12px;width:min(calc(100vw - 24px - var(--ct-off)),calc(60svh * .8))}
+  .ct-pic{height:auto;aspect-ratio:4/5}
+  .ct-pic img{object-position:50% 0}
+  .ct-cap{right:auto;left:0;text-align:left;font-size:10px;letter-spacing:.04em}
+  .ct-copy{position:relative;left:auto;top:auto;width:auto;margin-top:calc(var(--ct-off) + 56px);padding:0 20px;transform:none} /* abaixo da legenda */
+  .ct .ct-title{font-size:calc((100vw - 40px) / 9)} /* "merece presença." cabe numa linha */
+  .ct-lead{margin-top:18px}
+  .ct-act{flex-direction:column;align-items:stretch;gap:12px;margin-top:28px}
+  .ct-cta{justify-content:space-between}
+  .sk{padding-bottom:clamp(72px,11vw,150px)} /* última régua de Serviços → foto = o mesmo padding das outras seções; o rosto fica a cerca de 96 px, como Laboratório → Serviços */
+}
+/* movimento reduzido: tudo já no estado final */
+@media (prefers-reduced-motion:reduce){
+  .ct-pic,.ct-pic img,.ct-frame,.ct-cap,.ct-lead,.ct-act{transition:none}
+  .ct-pic{clip-path:none}.ct-pic img{transform:none}.ct-frame,.ct-cap{opacity:1}
+  .ct-title [data-c][data-lit]{animation:none;color:var(--ct-cream)}
+  .ct-title .acc [data-c][data-lit]{color:var(--orange)}
+  .ct-cta.on{animation:none;transition:none}
+}
+
+/* ---------- 9 rodapé ---------- */
+footer{padding:clamp(56px,8vw,110px) var(--gutter) clamp(100px,8vw,130px);border-top:1px solid var(--border);overflow:hidden}
+.giant{font-family:'Poppins';font-weight:800;font-size:9.6vw;line-height:.9;letter-spacing:-.04em;white-space:nowrap;margin-left:-.04em}
+.giant span{font-weight:300}
+.f-phrase{font-family:'Poppins';font-weight:600;font-size:clamp(13px,1.5vw,20px);letter-spacing:.16em;margin-top:clamp(14px,2vw,26px);color:var(--orange)}
+.f-end{display:flex;justify-content:space-between;gap:16px 32px;flex-wrap:wrap;margin-top:clamp(40px,6vw,80px);font-size:14px;color:var(--muted)}
+.f-end a{color:var(--white);font-weight:500}
+.f-end a:hover{color:var(--orange)}
+.f-social{display:flex;flex-wrap:wrap;gap:8px 22px}
+
+/* ---------- responsivo ---------- */
+@media (max-width:760px){
+  body{font-size:16px}
+  .burger{display:block;position:relative;z-index:2}
+  .nav{position:fixed;inset:0;background:var(--black);flex-direction:column;justify-content:center;gap:10px;padding:0 var(--gutter);font-weight:800;font-size:44px;letter-spacing:-.03em;opacity:0;visibility:hidden;transition:opacity .3s,visibility .3s}
+  .nav.open{opacity:1;visibility:visible}
+  .top .sig{position:relative;z-index:2}
+  .giant{font-size:9.9vw}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .pre{display:none}
+  .js .rv{opacity:1;transform:none;transition:none}
+  .js .hero .rv{transition-delay:0s}
+  .js .hero-fig{opacity:1;transition:none}
+  .js .hero-arc path{stroke-dashoffset:0;transition:none}
+  .mq-track{animation:none}
+  .cur{display:none}
+  [data-hw] .c{animation:none!important}
+  *{transition-duration:.01ms!important}
+}
+</style>
+</head>
+<body>
+
+<!-- 0 · ABERTURA -->
+<div class="pre" aria-hidden="true">
+  <div class="pre-half t"><div class="pre-scene">
+    <span class="pre-corner l">©2026</span><span class="pre-corner r">Goiânia, GO</span>
+    <div class="pre-name"><span class="w">FLÁVIO</span><span class="w acc">MAGALHÃES</span></div>
+    <div class="pre-foot"><span class="pre-track"><i></i></span><span class="pre-count"><span class="n">0</span><small>%</small></span></div>
+  </div></div>
+  <div class="pre-half b"><div class="pre-scene">
+    <span class="pre-corner l">©2026</span><span class="pre-corner r">Goiânia, GO</span>
+    <div class="pre-name"><span class="w">FLÁVIO</span><span class="w acc">MAGALHÃES</span></div>
+    <div class="pre-foot"><span class="pre-track"><i></i></span><span class="pre-count"><span class="n">0</span><small>%</small></span></div>
+  </div></div>
+  <div class="pre-cut"></div>
+</div>
+
+<!-- 1 · TOPO -->
+<header class="top" id="top">
+  <button class="burger" aria-expanded="false" aria-controls="nav">Menu</button>
+  <nav class="nav" id="nav" aria-label="Seções">
+    <a href="#projetos" data-hw>Projetos</a>
+    <a href="#laboratorio" data-hw>Laboratório</a>
+    <a href="#servicos" data-hw>Serviços</a>
+    <a href="#contato" data-hw>Contato</a>
+  </nav>
+</header>
+
+<main>
+
+<!-- 2 · HERO -->
+<section class="hero" id="inicio">
+ <div class="hero-in">
+  <div class="kicker rv">Social media designer <i></i> Goiânia</div>
+  <div class="hero-stage">
+    <h1 aria-label="Flávio Magalhães"><span class="hero-big rv" style="--i:1" aria-hidden="true"><span class="letter-f">F</span><span class="letter-l">L</span><span class="letter-a">A</span><span class="letter-v">V</span><span class="letter-i">I</span><span class="letter-o">O</span></span></h1>
+    <svg class="hero-arc" viewBox="0 0 1672 941" aria-hidden="true"><path pathLength="1" d="M1170 570 C 1232 524, 1312 497, 1386 497 C 1502 497, 1576 562, 1566 652 C 1558 722, 1530 782, 1500 830"/></svg>
+    <picture>
+      <!-- no celular, retrato vertical feito para a tela em pé (enviado pelo usuário em 19/11/2026) -->
+      <source media="(max-width:760px)" srcset="assets/flavio-mobile.webp" width="941" height="1670">
+      <img class="hero-fig" src="assets/flavio-recorte.webp" fetchpriority="high" width="1672" height="941" alt="Flávio Magalhães de gola alta preta, mão no queixo, olhando para a câmera">
+    </picture>
+    <div class="hero-sub rv" style="--i:2" aria-hidden="true">MAGALHÃES</div>
+  </div>
+  <div class="hero-copy">
+    <p class="rv" style="--i:3">Design que comunica,<br>posiciona e vende.</p>
+    <hr class="rv" style="--i:4">
+    <p class="serif rv" style="--i:5"><em>Critério</em> antes<br><em>da</em> ferramenta.</p>
+  </div>
+ </div>
+</section>
+
+<!-- 3 · APRESENTAÇÃO -->
+<section class="ab" id="sobre" aria-label="Sobre Flávio Magalhães">
+  <div class="ab-stage">
+    <!-- triângulo da esquerda: <  (ponta para fora, aberto para o texto) -->
+    <div class="ab-col ab-l">
+      <figure class="ab-pic face t"><img src="assets/sobre-foto-jaqueta.webp" alt="Flávio de jaqueta de couro preta em fundo laranja" loading="lazy"></figure>
+      <figure class="ab-pic face m"><img src="assets/sobre-foto-moldura.webp" alt="Flávio enquadrando a câmera com as mãos, em luz laranja" loading="lazy"></figure>
+      <figure class="ab-pic face b"><img src="assets/sobre-foto-relogio.webp" alt="Flávio de braços cruzados com relógio prateado, em fundo preto" loading="lazy"></figure>
+    </div>
+    <!-- triângulo da direita: >  (espelhado) -->
+    <div class="ab-col ab-r">
+      <figure class="ab-pic face t"><img src="assets/sobre-foto-perfil.webp" alt="Flávio de perfil olhando para cima, em fundo laranja avermelhado" loading="lazy"></figure>
+      <figure class="ab-pic face m"><img src="assets/sobre-foto-halo.webp" alt="Flávio de braços cruzados diante de um halo de luz laranja" loading="lazy"></figure>
+      <figure class="ab-pic face b"><img src="assets/sobre-foto-tablet.webp" alt="Flávio segurando um tablet, em fundo preto com brilho laranja" loading="lazy"></figure>
+    </div>
+    <div class="ab-copy">
+      <h2 id="ab-txt">Oi, eu sou o Flávio, designer gráfico e social media desde 2017, com MBA em Social Media. Ajudo criadores e empresas a fortalecer a presença digital com design e estratégia que <span class="accent">posicionam marcas e geram resultados.</span></h2>
+    </div>
+  </div>
+</section>
+
+<!-- 4 · CLIENTES & PARCERIAS: fora desta versão até existirem logos reais (ver PLANEJAMENTO.md) -->
+
+<!-- 5 · PROJETOS (espelho do "Selected Projects" de pamidordesign.co, com trava: cada gesto abre o próximo projeto) -->
+<!-- Projetos reais do Behance (behance.net/fllaviodesigner), escolhidos em 18/11/2026. -->
+<section id="projetos" class="pp">
+  <div class="pp-head">
+    <h2 class="rv">Projetos <span class="o">selecionados</span></h2>
+  </div>
+  <div class="pp-track">
+  <div class="pp-stage">
+    <ul class="pp-list">
+      <li class="pp-item on">
+        <div class="pp-a"><div class="pp-grid">
+          <div class="pp-l">
+            <div class="pp-row"><h3 class="pp-nm" data-hw>We Digital</h3><a class="pp-btn" href="https://www.behance.net/gallery/229418689/Design-para-social-Media" target="_blank" rel="noopener" data-hw>Ver projeto <svg aria-hidden="true" viewBox="0 0 16 16" fill="currentColor"><g transform="translate(1.9 3.056) scale(0.40966)"><path d="M23.1099 10.9188C19.5082 8.73064 14.2988 4.0372 13.5814 0.0155222L15.9065 3.2973e-06C17.9701 4.66018 24.0697 10.0675 29.7806 10.9898L29.759 13.0893C24.3025 14.0138 17.8165 19.4278 15.9857 24.1101L13.6701 24.1367C13.9005 20.39 19.7218 15.2819 23.0571 13.1913L0.00959874 13.1691L5.90407e-07 10.9388L23.1099 10.9188Z"/></g></svg></a></div>
+            <dl class="pp-dl" aria-hidden="true"><div><dt>Serviço</dt><dd>Social media</dd></div><div><dt>Segmento</dt><dd>Agência digital</dd></div><div><dt>Entregas</dt><dd>Posts e motion</dd></div></dl>
+          </div>
+          <div class="pp-c"><div><a class="pp-cover" href="https://www.behance.net/gallery/229418689/Design-para-social-Media" target="_blank" rel="noopener" aria-label="We Digital no Behance"><img src="assets/behance-wedigital.jpg" width="808" height="632" alt="Capa do projeto We Digital" loading="lazy"><span class="pp-over" aria-hidden="true"><span class="pp-chips"><span>We Digital</span><span>Social media</span><span>Agência digital</span></span></span></a></div></div>
+        </div></div>
+        <div class="pp-hr" aria-hidden="true"></div>
+      </li>
+      <li class="pp-item">
+        <div class="pp-a"><div class="pp-grid">
+          <div class="pp-l">
+            <div class="pp-row"><h3 class="pp-nm" data-hw>Low &amp; Fit</h3><a class="pp-btn" href="https://www.behance.net/gallery/224414397/Identidade-Visual-Low-e-Fit" target="_blank" rel="noopener" data-hw>Ver projeto <svg aria-hidden="true" viewBox="0 0 16 16" fill="currentColor"><g transform="translate(1.9 3.056) scale(0.40966)"><path d="M23.1099 10.9188C19.5082 8.73064 14.2988 4.0372 13.5814 0.0155222L15.9065 3.2973e-06C17.9701 4.66018 24.0697 10.0675 29.7806 10.9898L29.759 13.0893C24.3025 14.0138 17.8165 19.4278 15.9857 24.1101L13.6701 24.1367C13.9005 20.39 19.7218 15.2819 23.0571 13.1913L0.00959874 13.1691L5.90407e-07 10.9388L23.1099 10.9188Z"/></g></svg></a></div>
+            <dl class="pp-dl" aria-hidden="true"><div><dt>Serviço</dt><dd>Identidade visual</dd></div><div><dt>Segmento</dt><dd>Marmitas congeladas</dd></div><div><dt>Entregas</dt><dd>Logo, cores e aplicações</dd></div></dl>
+          </div>
+          <div class="pp-c"><div><a class="pp-cover" href="https://www.behance.net/gallery/224414397/Identidade-Visual-Low-e-Fit" target="_blank" rel="noopener" aria-label="Low &amp; Fit no Behance"><img src="assets/behance-lowfit.jpg" width="808" height="632" alt="Capa do projeto Low &amp; Fit" loading="lazy"><span class="pp-over" aria-hidden="true"><span class="pp-chips"><span>Low &amp; Fit</span><span>Identidade visual</span><span>Marmitas congeladas</span></span></span></a></div></div>
+        </div></div>
+        <div class="pp-hr" aria-hidden="true"></div>
+      </li>
+      <li class="pp-item">
+        <div class="pp-a"><div class="pp-grid">
+          <div class="pp-l">
+            <div class="pp-row"><h3 class="pp-nm" data-hw>Moda Africana</h3><a class="pp-btn" href="https://www.behance.net/gallery/206531901/Designer-Social-Media-Moda-Africana" target="_blank" rel="noopener" data-hw>Ver projeto <svg aria-hidden="true" viewBox="0 0 16 16" fill="currentColor"><g transform="translate(1.9 3.056) scale(0.40966)"><path d="M23.1099 10.9188C19.5082 8.73064 14.2988 4.0372 13.5814 0.0155222L15.9065 3.2973e-06C17.9701 4.66018 24.0697 10.0675 29.7806 10.9898L29.759 13.0893C24.3025 14.0138 17.8165 19.4278 15.9857 24.1101L13.6701 24.1367C13.9005 20.39 19.7218 15.2819 23.0571 13.1913L0.00959874 13.1691L5.90407e-07 10.9388L23.1099 10.9188Z"/></g></svg></a></div>
+            <dl class="pp-dl" aria-hidden="true"><div><dt>Serviço</dt><dd>Social media</dd></div><div><dt>Segmento</dt><dd>Moda</dd></div><div><dt>Entregas</dt><dd>Posts com cor e estampa</dd></div></dl>
+          </div>
+          <div class="pp-c"><div><a class="pp-cover" href="https://www.behance.net/gallery/206531901/Designer-Social-Media-Moda-Africana" target="_blank" rel="noopener" aria-label="Moda Africana no Behance"><img src="assets/behance-moda-africana.jpg" width="808" height="632" alt="Capa do projeto Moda Africana" loading="lazy"><span class="pp-over" aria-hidden="true"><span class="pp-chips"><span>Moda Africana</span><span>Social media</span><span>Moda</span></span></span></a></div></div>
+        </div></div>
+        <div class="pp-hr" aria-hidden="true"></div>
+      </li>
+      <li class="pp-item">
+        <div class="pp-a"><div class="pp-grid">
+          <div class="pp-l">
+            <div class="pp-row"><h3 class="pp-nm" data-hw>Proteção Veicular</h3><a class="pp-btn" href="https://www.behance.net/gallery/204081963/Designer-Social-Media-Protecao-Veicular" target="_blank" rel="noopener" data-hw>Ver projeto <svg aria-hidden="true" viewBox="0 0 16 16" fill="currentColor"><g transform="translate(1.9 3.056) scale(0.40966)"><path d="M23.1099 10.9188C19.5082 8.73064 14.2988 4.0372 13.5814 0.0155222L15.9065 3.2973e-06C17.9701 4.66018 24.0697 10.0675 29.7806 10.9898L29.759 13.0893C24.3025 14.0138 17.8165 19.4278 15.9857 24.1101L13.6701 24.1367C13.9005 20.39 19.7218 15.2819 23.0571 13.1913L0.00959874 13.1691L5.90407e-07 10.9388L23.1099 10.9188Z"/></g></svg></a></div>
+            <dl class="pp-dl" aria-hidden="true"><div><dt>Serviço</dt><dd>Social media</dd></div><div><dt>Segmento</dt><dd>Proteção veicular</dd></div><div><dt>Entregas</dt><dd>Feed completo</dd></div></dl>
+          </div>
+          <div class="pp-c"><div><a class="pp-cover" href="https://www.behance.net/gallery/204081963/Designer-Social-Media-Protecao-Veicular" target="_blank" rel="noopener" aria-label="Proteção Veicular no Behance"><img src="assets/behance-protecao-veicular.jpg" width="808" height="632" alt="Capa do projeto Proteção Veicular" loading="lazy"><span class="pp-over" aria-hidden="true"><span class="pp-chips"><span>Proteção Veicular</span><span>Social media</span><span>Proteção veicular</span></span></span></a></div></div>
+        </div></div>
+        <div class="pp-hr" aria-hidden="true"></div>
+      </li>
+    </ul>
+  </div>
+  </div>
+</section>
+
+<!-- 6 · LABORATÓRIO -->
+<section class="lab" id="laboratorio">
+  <!-- título fora da área fixa, como em Projetos -->
+  <div class="lab-head">
+    <h2 class="rv">O <span class="o">Laboratório</span></h2>
+    <p class="rv" style="--i:1">Cada capa vira uma cena, e eu faço todos os papéis. A IA produz; a direção é minha.</p>
+  </div>
+  <div class="lab-track">
+  <div class="lab-stage">
+    <!-- data-set e data-line alimentam os créditos; data-line é a chamada impressa na capa -->
+    <div class="lab-ring-wrap">
+      <div class="lab-ring" aria-label="Capas do Laboratório">
+        <figure class="lab-card" data-set="Pastelaria" data-line="Pastel fica pronto em 3 minutos. E o seu design?"><img src="assets/lab-pastel.jpg" alt="Capa: Pastel fica pronto em 3 minutos. E o seu design?" loading="lazy"><figcaption class="cap"><span>Cena 01</span><span>Pastelaria</span></figcaption></figure>
+        <figure class="lab-card" data-set="Cafeteria" data-line="Starbucks não vende café. E você também não deveria vender só post."><img src="assets/lab-starbucks.jpg" alt="Capa: Starbucks não vende café" loading="lazy"><figcaption class="cap"><span>Cena 02</span><span>Cafeteria</span></figcaption></figure>
+        <figure class="lab-card" data-set="Dojo" data-line="Você acha que a IA serve só para gerar imagens bonitas?"><img src="assets/lab-karate.jpg" alt="Capa com o Flávio de kimono dando um chute" loading="lazy"><figcaption class="cap"><span>Cena 03</span><span>Dojo</span></figcaption></figure>
+        <figure class="lab-card" data-set="Estúdio" data-line="A logo que fez todo mundo discutir."><img src="assets/lab-spotify.jpg" alt="Capa sobre a identidade do Spotify" loading="lazy"><figcaption class="cap"><span>Cena 04</span><span>Estúdio</span></figcaption></figure>
+        <figure class="lab-card" data-set="Mão gigante" data-line="Seu perfil pode estar perdendo clientes sem você perceber."><img src="assets/lab-clientes.jpg" alt="Capa: seu perfil pode estar perdendo clientes" loading="lazy"><figcaption class="cap"><span>Cena 05</span><span>Mão gigante</span></figcaption></figure>
+        <figure class="lab-card" data-set="Papel rasgado" data-line="Até descobrir que o Claude faz isso por mim em 10 minutos."><img src="assets/lab-claude.jpg" alt="Capa: Claude faz isso por mim em 10 minutos" loading="lazy"><figcaption class="cap"><span>Cena 06</span><span>Papel rasgado</span></figcaption></figure>
+      </div>
+    </div>
+    <div class="lab-credit" aria-hidden="true">
+      <div class="lab-num">Cena <b>01</b> / 06</div>
+      <h3 class="lab-set"></h3>
+      <p class="lab-line"></p>
+    </div>
+    <div class="lab-side">
+      <ol class="lab-index" aria-label="Cenas do Laboratório"></ol>
+      <!-- leva ao WhatsApp com mensagem pronta (CONFIG.whatsapp); sem número, leva à seção de contato -->
+      <div class="lab-more"><a class="pill cta" data-hw data-wa="Oi, Flávio! Vi o Laboratório no seu site e quero conversar sobre um projeto para a minha marca." href="#contato">Quero um projeto assim <i>›</i></a></div>
+    </div>
+  </div>
+  </div>
+</section>
+
+<!-- 7 · SERVIÇOS (a mesma sanfona do Projetos: cada gesto abre o serviço seguinte) -->
+<!-- data-wa: mensagem pronta do WhatsApp (o link vem do CONFIG.whatsapp); o grupo do Telegram foi informado pelo Flávio (doc "Quem sou", 18/11/2026) -->
+<section class="pp sk" id="servicos" style="--n:3">
+  <div class="pp-head">
+    <h2 class="rv">O que eu <span class="o">faço</span></h2>
+  </div>
+  <div class="pp-track">
+  <div class="pp-stage">
+    <ul class="pp-list">
+      <li class="pp-item on">
+        <div class="pp-a"><div class="pp-grid">
+          <div class="pp-l">
+            <div class="pp-row"><h3 class="pp-nm" data-hw>Design para Social Media</h3><a class="pp-btn" href="#contato" data-wa="Oi, Flávio! Vi seu site e quero conversar sobre design para as redes sociais da minha marca." data-hw>Pedir orçamento <svg aria-hidden="true" viewBox="0 0 16 16" fill="currentColor"><g transform="translate(1.9 3.056) scale(0.40966)"><path d="M23.1099 10.9188C19.5082 8.73064 14.2988 4.0372 13.5814 0.0155222L15.9065 3.2973e-06C17.9701 4.66018 24.0697 10.0675 29.7806 10.9898L29.759 13.0893C24.3025 14.0138 17.8165 19.4278 15.9857 24.1101L13.6701 24.1367C13.9005 20.39 19.7218 15.2819 23.0571 13.1913L0.00959874 13.1691L5.90407e-07 10.9388L23.1099 10.9188Z"/></g></svg></a></div>
+            <dl class="pp-dl" aria-hidden="true"><div><dt>Entrega</dt><dd>Artes para posts</dd></div><div><dt>Foco</dt><dd>Chamar a atenção</dd></div><div><dt>Resultado</dt><dd>Profissionalismo em cada post</dd></div></dl>
+          </div>
+          <div class="pp-c"><div><a class="pp-cover" href="#contato" data-wa="Oi, Flávio! Vi seu site e quero conversar sobre design para as redes sociais da minha marca." aria-label="Design para Social Media: Pedir orçamento"><img src="assets/servico-design.webp" width="960" height="640" alt="Flávio com peças de social media" loading="lazy"><span class="pp-over" aria-hidden="true"><span class="pp-chips"><span>Design para Social Media</span><span>Artes para posts</span></span></span></a></div></div>
+        </div></div>
+        <div class="pp-hr" aria-hidden="true"></div>
+      </li>
+      <li class="pp-item">
+        <div class="pp-a"><div class="pp-grid">
+          <div class="pp-l">
+            <div class="pp-row"><h3 class="pp-nm" data-hw>Social Media</h3><a class="pp-btn" href="#contato" data-wa="Oi, Flávio! Vi seu site e quero conversar sobre a gestão das redes sociais da minha marca." data-hw>Pedir orçamento <svg aria-hidden="true" viewBox="0 0 16 16" fill="currentColor"><g transform="translate(1.9 3.056) scale(0.40966)"><path d="M23.1099 10.9188C19.5082 8.73064 14.2988 4.0372 13.5814 0.0155222L15.9065 3.2973e-06C17.9701 4.66018 24.0697 10.0675 29.7806 10.9898L29.759 13.0893C24.3025 14.0138 17.8165 19.4278 15.9857 24.1101L13.6701 24.1367C13.9005 20.39 19.7218 15.2819 23.0571 13.1913L0.00959874 13.1691L5.90407e-07 10.9388L23.1099 10.9188Z"/></g></svg></a></div>
+            <dl class="pp-dl" aria-hidden="true"><div><dt>Entrega</dt><dd>Planejamento, criação e gestão</dd></div><div><dt>Foco</dt><dd>Posicionamento</dd></div><div><dt>Resultado</dt><dd>Gerar negócios</dd></div></dl>
+          </div>
+          <div class="pp-c"><div><a class="pp-cover" href="#contato" data-wa="Oi, Flávio! Vi seu site e quero conversar sobre a gestão das redes sociais da minha marca." aria-label="Social Media: Pedir orçamento"><img src="assets/servico-estrategia.webp" width="960" height="640" alt="Flávio planejando o conteúdo das redes" loading="lazy"><span class="pp-over" aria-hidden="true"><span class="pp-chips"><span>Social Media</span><span>Planejamento, criação e gestão</span></span></span></a></div></div>
+        </div></div>
+        <div class="pp-hr" aria-hidden="true"></div>
+      </li>
+      <li class="pp-item">
+        <div class="pp-a"><div class="pp-grid">
+          <div class="pp-l">
+            <div class="pp-row"><h3 class="pp-nm" data-hw>Grupo no Telegram</h3><a class="pp-btn" href="https://t.me/brabodesigner" target="_blank" rel="noopener" data-hw>Entrar no grupo <svg aria-hidden="true" viewBox="0 0 16 16" fill="currentColor"><g transform="translate(1.9 3.056) scale(0.40966)"><path d="M23.1099 10.9188C19.5082 8.73064 14.2988 4.0372 13.5814 0.0155222L15.9065 3.2973e-06C17.9701 4.66018 24.0697 10.0675 29.7806 10.9898L29.759 13.0893C24.3025 14.0138 17.8165 19.4278 15.9857 24.1101L13.6701 24.1367C13.9005 20.39 19.7218 15.2819 23.0571 13.1913L0.00959874 13.1691L5.90407e-07 10.9388L23.1099 10.9188Z"/></g></svg></a></div>
+            <dl class="pp-dl" aria-hidden="true"><div><dt>Entrega</dt><dd>Comunidade exclusiva</dd></div><div><dt>Foco</dt><dd>Referências e tendências</dd></div><div><dt>Tema</dt><dd>Design e social media</dd></div></dl>
+          </div>
+          <div class="pp-c"><div><a class="pp-cover" href="https://t.me/brabodesigner" target="_blank" rel="noopener" aria-label="Grupo no Telegram: Entrar no grupo"><img src="assets/servico-comunidade.webp" width="960" height="640" alt="Flávio com a comunidade no Telegram" loading="lazy"><span class="pp-over" aria-hidden="true"><span class="pp-chips"><span>Grupo no Telegram</span><span>Comunidade exclusiva</span></span></span></a></div></div>
+        </div></div>
+        <div class="pp-hr" aria-hidden="true"></div>
+      </li>
+    </ul>
+  </div>
+  </div>
+</section>
+
+<!-- 8 · CONTATO -->
+<section class="ct" id="contato" aria-labelledby="ct-title">
+  <figure class="ct-card">
+    <div class="ct-frame" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+    <div class="ct-pic face"><img src="assets/contato-retrato.webp" width="900" height="1125" alt="Flávio Magalhães sorrindo, de mãos juntas, em fundo laranja" loading="lazy" decoding="async"></div>
+    <figcaption class="ct-cap">Flávio Magalhães · Social media designer · Goiânia</figcaption>
+  </figure>
+  <div class="ct-copy">
+    <h2 class="ct-title" id="ct-title" aria-label="Sua marca merece presença."><span class="ln" aria-hidden="true">Sua marca</span><span class="ln" aria-hidden="true"><span class="w">merece </span><span class="w acc">presença.</span></span></h2>
+    <p class="ct-lead">Um projeto em mente? Vamos conversar sobre o próximo passo da sua marca.</p>
+    <div class="ct-act">
+      <a class="ct-cta" id="ctWa" href="#contato" data-wa="Oi, Flávio! Tenho um projeto em mente e gostaria de conversar sobre a presença visual da minha marca.">Chamar no WhatsApp<span class="arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></span></a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- FAIXA FIXA DE SERVIÇOS (fica no rodapé da tela em todas as seções) -->
+<div class="hero-ticks rv" aria-hidden="true"></div>
+<ul class="hero-bar rv" aria-label="Serviços">
+  <li class="cross" aria-hidden="true" style="--ci:0"><i></i></li><li class="service">Social Media</li>
+  <li class="cross" aria-hidden="true" style="--ci:1"><i></i></li><li class="service">Direção de Arte</li>
+  <li class="cross" aria-hidden="true" style="--ci:2"><i></i></li><li class="service">Branding</li>
+  <li class="cross" aria-hidden="true" style="--ci:3"><i></i></li>
+</ul>
+
+<!-- 9 · RODAPÉ -->
+<footer>
+  <div class="giant" aria-label="Flávio Magalhães"><span>FLÁVIO</span> MAGALHÃES</div>
+  <p class="f-phrase">ENTRE O CRITÉRIO E A FERRAMENTA.</p>
+  <div class="f-end">
+    <span class="f-social">
+      <a href="https://www.instagram.com/fllaviodesigner" target="_blank" rel="noopener">Instagram</a>
+      <a href="https://www.behance.net/fllaviodesigner" target="_blank" rel="noopener">Behance</a>
+      <a href="https://www.linkedin.com/in/fllaviodesigner" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="https://www.tiktok.com/@fllaviodesigner" target="_blank" rel="noopener">TikTok</a>
+      <a href="https://www.youtube.com/@fllaviodesigner" target="_blank" rel="noopener">YouTube</a>
+      <a href="https://www.threads.com/@fllaviodesigner" target="_blank" rel="noopener">Threads</a>
+      <a href="https://www.facebook.com/fllaviodesigner" target="_blank" rel="noopener">Facebook</a>
+    </span>
+    <span>© 2026 Flávio Magalhães · Design de verdade tem processo.</span>
+  </div>
+</footer>
+
+<div class="cur" id="cur" aria-hidden="true"><span></span></div>
+
+<script src="https://unpkg.com/lenis@1.1.20/dist/lenis.min.js"></script>
+
+<script>
+/* ===== Preencha aqui quando os dados forem confirmados =====
+   whatsapp: só números com DDI e DDD, ex.: '5562999999999'.
+   Com o número preenchido, as chamadas abrem o WhatsApp com a mensagem pronta.
+   Sem ele, o contato oferece o direct real do Instagram como alternativa. */
+var CONFIG = { whatsapp: '5562981669400', instagram: 'fllaviodesigner' }; // (62) 98166-9400, doc "Quem sou" de 18/11/2026
+
+(function(){
+  var $ = function(s, c){ return (c||document).querySelector(s) };
+  var $$ = function(s, c){ return Array.prototype.slice.call((c||document).querySelectorAll(s)) };
+  var root = document.documentElement;
+  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var fine = window.matchMedia('(hover:hover) and (pointer:fine)').matches;
+  var clamp = function(v){ return Math.max(0, Math.min(1, v)) };
+
+  // divide o texto em letras; o leitor de tela continua lendo a frase inteira
+  function splitChars(el){
+    var i = 0, out = [];
+    (function walk(node){
+      Array.prototype.slice.call(node.childNodes).forEach(function(n){
+        if (n.nodeType === 3){
+          if (!n.textContent.trim()) return;
+          var sr = document.createElement('span'); sr.className = 'sr'; sr.textContent = n.textContent;
+          var vis = document.createElement('span'); vis.setAttribute('aria-hidden', 'true');
+          n.textContent.split('').forEach(function(ch){
+            if (/\s/.test(ch)){ vis.appendChild(document.createTextNode(ch)); return }
+            var s = document.createElement('span'); s.className = 'c'; s.textContent = ch; s.style.setProperty('--hwi', i++);
+            vis.appendChild(s); out.push(s);
+          });
+          var f = document.createDocumentFragment(); f.appendChild(sr); f.appendChild(vis);
+          node.replaceChild(f, n);
+        } else if (n.nodeType === 1 && !n.classList.contains('todo') && !n.classList.contains('sr')) walk(n);
+      });
+    })(el);
+    return out;
+  }
+
+  // abertura (versão A): o nome acende com o contador; no 100, a linha corta e o obturador abre.
+  // Linha do tempo: contador 1,5 s → corte em +0,38 s → abre em +0,76 s (0,95 s) → some.
+  // A entrada da Hero está atrasada pelo mesmo tanto (--pre-d no :root).
+  var pre = $('.pre');
+  if (pre && !reduced){
+    var preScenes = $$('.pre-scene', pre), preChars = preScenes.map(function(s){
+      $$('.w', s).forEach(function(w){
+        var t = w.textContent; w.textContent = '';
+        Array.from(t).forEach(function(ch){ var c = document.createElement('span'); c.setAttribute('data-c', ''); c.textContent = ch; w.appendChild(c) });
+      });
+      return $$('[data-c]', s);
+    });
+    var preN = preChars[0].length, preLit = 0, preT0 = performance.now(), preEnded = false;
+    var preEnd = function(){
+      if (preEnded) return; preEnded = true;
+      preChars.forEach(function(list){ list.forEach(function(c){ c.setAttribute('data-lit', '') }) });
+      preScenes.forEach(function(s){ $('.n', s).textContent = '100'; s.style.setProperty('--pp', '1') });
+      setTimeout(function(){ pre.classList.add('cutting') }, 380);
+      setTimeout(function(){ pre.classList.add('open') }, 760);
+      setTimeout(function(){ pre.classList.add('gone') }, 1800);
+    };
+    (function preTick(now){
+      var p = Math.min(1, (now - preT0) / 1500), e = 1 - Math.pow(1 - p, 2.2); // rápido no começo, desacelera no fim
+      for (var target = Math.round(e * preN); preLit < target; preLit++) preChars.forEach(function(list){ list[preLit].setAttribute('data-lit', '') });
+      preScenes.forEach(function(s){ $('.n', s).textContent = Math.round(e * 100); s.style.setProperty('--pp', e.toFixed(3)) });
+      if (p < 1) requestAnimationFrame(preTick); else preEnd();
+    })(preT0);
+    setTimeout(preEnd, 3000); // segurança se os quadros pararem (aba em segundo plano)
+  }
+
+  // scroll suave (Lenis); sem ele a página rola normalmente
+  var lenis = null;
+  if (window.Lenis && !reduced){
+    lenis = new Lenis({ lerp: 0.1 });
+    (function raf(t){ lenis.raf(t); requestAnimationFrame(raf) })(performance.now());
+  }
+  document.addEventListener('click', function(e){
+    var a = e.target.closest && e.target.closest('a[href^="#"]');
+    if (!a) return;
+    var target = $(a.getAttribute('href'));
+    if (!target) return;
+    e.preventDefault();
+    setMenu(false);
+    if (lenis) lenis.scrollTo(target, { duration: 1.4 }); else target.scrollIntoView({ behavior: reduced ? 'auto' : 'smooth' });
+  });
+
+  // topo
+  var top = $('#top'), nav = $('#nav'), burger = $('.burger');
+  function setMenu(open){
+    nav.classList.toggle('open', open); burger.setAttribute('aria-expanded', open); burger.textContent = open ? 'Fechar' : 'Menu';
+    document.body.style.overflow = open ? 'hidden' : '';
+    if (lenis){ if (open) lenis.stop(); else lenis.start() }
+  }
+  burger.addEventListener('click', function(){ setMenu(!nav.classList.contains('open')) });
+
+  // onda por caractere no hover
+  $$('[data-hw]').forEach(splitChars);
+
+  // entradas
+  if ('IntersectionObserver' in window){
+    var io = new IntersectionObserver(function(es){ es.forEach(function(e){ if (e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target) } }) }, {rootMargin:'0px 0px -8% 0px'});
+    $$('.rv').forEach(function(el){ io.observe(el) });
+  } else { $$('.rv').forEach(function(el){ el.classList.add('in') }) }
+
+  // apresentação: triângulos de imagens + onda de cor guiada pelo scroll (lógica do pamidordesign.co)
+  var ab = $('#sobre'), abStage = $('.ab-stage', ab), abCols = $$('.ab-col', ab), abPics = $$('.ab-pic', ab), abTxt = $('#ab-txt');
+  /* celular: espaço fixo entre as frases da Hero e as primeiras capas do Sobre. As outras seções
+     usam 168 px; o usuário pediu metade aqui (84 px, 19/11/2026). A fileira de cima fica
+     centralizada na área fixa, então a distância depende da altura da tela; a margem do .ab compensa. */
+  var AB_GAP = 84, heroEl = $('.hero'), heroLast = $('.hero-copy p');
+  var abGap = function(){
+    if (innerWidth > 760){ ab.style.marginTop = ''; return }
+    ab.style.marginTop = '0px';
+    var heroRest = heroEl.getBoundingClientRect().bottom - heroLast.getBoundingClientRect().bottom; // folga da Hero abaixo das frases
+    var colTop = abCols[0].getBoundingClientRect().top - abStage.getBoundingClientRect().top;      // topo da fileira de cima dentro da área fixa
+    ab.style.marginTop = Math.round(AB_GAP - heroRest - colTop) + 'px';
+  };
+  abGap(); window.addEventListener('resize', abGap);
+  if (document.fonts) document.fonts.ready.then(abGap);
+  if (!reduced){
+    var abChars = [], abLit = 0, amx = 0, amy = 0, atx = 0, aty = 0;
+    var seg = function(p, a, b){ return clamp((p - a) / (b - a)) };
+    var ease = function(t){ return 1 - Math.pow(1 - t, 3) };
+    var lerp = function(a, b, t){ return a + (b - a) * t };
+    abTxt.setAttribute('aria-label', abTxt.textContent.replace(/\s+/g, ' ').trim());
+    (function split(el){
+      Array.prototype.slice.call(el.childNodes).forEach(function(n){
+        if (n.nodeType === 3){
+          var f = document.createDocumentFragment();
+          n.nodeValue.split(/(\s+)/).filter(Boolean).forEach(function(part){
+            if (/^\s+$/.test(part)){ f.appendChild(document.createTextNode(' ')); return }
+            var w = document.createElement('span'); w.className = 'w'; w.setAttribute('aria-hidden', 'true');
+            Array.from(part).forEach(function(ch){ var c = document.createElement('span'); c.setAttribute('data-c', ''); c.textContent = ch; abChars.push(c); w.appendChild(c) });
+            f.appendChild(w);
+          });
+          n.parentNode.replaceChild(f, n);
+        } else split(n);
+      });
+    })(abTxt);
+    if (fine) window.addEventListener('pointermove', function(e){ atx = e.clientX / innerWidth - .5; aty = e.clientY / innerHeight - .5 }, {passive:true});
+    var abFrame = function(){
+      var r = ab.getBoundingClientRect(), vh = innerHeight;
+      var p = clamp(-r.top / Math.max(1, ab.offsetHeight - vh));    // progresso do trecho fixo
+      var enter = clamp((vh - r.top) / vh);                          // 0 → 1 enquanto a seção chega
+      amx = lerp(amx, atx, .06); amy = lerp(amy, aty, .06);
+      var banded = innerWidth <= 960 || innerWidth / vh <= 1.25;
+      // os triângulos se formam enquanto o texto acende
+      abStage.style.setProperty('--k', ease(seg(p, .02, .4)).toFixed(4));
+      abCols.forEach(function(col){
+        var drift = banded ? 0 : (.5 - p) * vh * .025;             // flutuação curta, sem invadir o respiro; nas fileiras do celular fica parada para manter a distância do texto
+        col.style.transform = 'translate3d(' + (amx * -10) + 'px,' + (drift + amy * -6) + 'px,0)';
+      });
+      abPics.forEach(function(el, i){
+        var open = ease(seg(enter, .25 + i * .05, .7 + i * .05));    // abre por máscara ao chegar
+        el.style.clipPath = 'inset(' + ((1 - open) * 100) + '% 0 0 0)';
+        var color = seg(p, .1 + i * .08, .45 + i * .08), img = el.firstElementChild;
+        img.style.transform = 'scale(' + lerp(1.18, 1.02, open) + ')';
+        img.style.filter = 'grayscale(' + (1 - color) + ') brightness(' + lerp(.75, 1, color) + ')';
+      });
+      // onda de cor: acende/apaga só a diferença
+      var lit = Math.round(p * abChars.length), i;
+      if (lit > abLit) for (i = abLit; i < lit; i++) abChars[i].setAttribute('data-lit', '');
+      else for (i = abLit - 1; i >= lit; i--) abChars[i].removeAttribute('data-lit');
+      abLit = lit;
+    };
+    (function abLoop(){
+      var r = ab.getBoundingClientRect();
+      if (r.bottom > -50 && r.top < innerHeight + 50) abFrame();
+      requestAnimationFrame(abLoop);
+    })();
+  }
+
+  // sanfona do "Selected Projects" de pamidordesign.co + trava (um item por gesto; só sai depois do último)
+  // usada em Projetos e em Serviços; next() diz quanto falta até o título da seção seguinte
+  // a trava só existe no desktop (no celular, a lista empilhada da referência); a classe é revista a cada medida
+  function accPinned(){ return root.classList.contains('pp-pin') }
+  function accPinSet(){ root.classList.toggle('pp-pin', !reduced && root.clientWidth >= 1024) }
+  accPinSet();
+  function makeAcc(sec, next){
+    var track = $('.pp-track', sec), stage = $('.pp-stage', sec), items = $$('.pp-item', sec), list = $('.pp-list', sec);
+    var N = items.length, off = 0, K = 0, on = -1, hover = -1;
+    sec.style.setProperty('--n', N);
+    function show(k){ on = k; items.forEach(function(it, i){ it.classList.toggle('on', i === k) }) }
+    function layout(){
+      var SH = stage.clientHeight || window.innerHeight, W = root.clientWidth, desk = W >= 1024;
+      var bar = desk ? 90 : 76;   // faixa fixa de serviços no pé: a lista termina acima dela
+      var hm, top, LH = 270 + (N - 1) * 112;   // altura da lista na referência (4 linhas: 606 px)
+      if (desk){
+        // uma unidade só (como o --px da referência): a lista cabe presa entre o topo e a faixa, com 24 px de folga
+        // a escala sai sempre da lista de 4 linhas (606 + 24): Projetos e Serviços ficam com as mesmas medidas
+        var u = Math.max(.6, Math.min(W / 1360, 1.2, (SH - bar - 24) / 630));
+        sec.style.setProperty('--u', u.toFixed(4));
+        top = Math.max(24 * u, (SH - bar - LH * u) / 2);
+        hm = 24 * u;   // título → régua da lista: 24 px, como lá
+      } else hm = 32;  // celular: título → régua, 32 px como no Pamidor
+      var n = next(desk, SH);
+      if (!accPinned()){
+        sec.style.setProperty('--pp-hm', hm + 'px');
+        sec.style.setProperty('--pp-pb', Math.max(0, n.want - n.pad) + 'px');   // fim da lista → título seguinte
+        off = 0; return;
+      }
+      // a lista fica presa a "top" do topo; antes de prender, o título fica a 24 px dela
+      sec.style.setProperty('--pp-top', top + 'px');
+      sec.style.setProperty('--pp-hm', (hm - top) + 'px');
+      off = Math.max(0, Math.ceil(top - hm + parseFloat(getComputedStyle($('.pp-head h2', sec)).fontSize) * .3));
+      // fim da lista → título da seção seguinte
+      var listEnd = top + list.offsetHeight;
+      sec.style.setProperty('--pp-mb', (n.want - n.pad - (SH - listEnd)) + 'px');
+    }
+    function range(){
+      var s = track.getBoundingClientRect().top + window.scrollY;
+      // off: a 1ª parada fica um pouco abaixo do início da trava, para o título (com as descendentes) já ter saído da tela
+      return { s: s + off, e: s + track.offsetHeight - (stage.clientHeight || window.innerHeight) };
+    }
+    function update(){
+      if (!accPinned()){
+        if (root.clientWidth >= 1024){ if (on < 0) show(0); return }   // desktop sem trava (movimento reduzido): o mouse decide
+        // celular: em destaque fica o último item cujo nome já passou de 2/3 da tela, como na referência
+        var vh = window.innerHeight, k = 0;
+        items.forEach(function(it, i){ if ($('.pp-nm', it).getBoundingClientRect().top < vh * .66) k = i });
+        if (k !== on) show(k);
+        return;
+      }
+      var R = range(), p = clamp((window.scrollY - R.s) / Math.max(1, R.e - R.s)), k = Math.max(0, Math.min(N - 1, Math.round(p * (N - 1))));
+      if (hover < 0 && k !== on) show(k);
+    }
+    // mouse (como na referência): abre o item sob o cursor; ao sair da lista, volta ao item da rolagem
+    if (fine){
+      items.forEach(function(it, i){ it.addEventListener('mouseenter', function(){ hover = i; if (on !== i) show(i) }) });
+      list.addEventListener('mouseleave', function(){ hover = -1; update() });
+    }
+    var dir = '', prevY = window.scrollY, touch = null, wh = { t: 0, d: 0, acc: 0, done: false };
+    function inside(){ if (!accPinned()) return false; var R = range(), y = window.scrollY; return y >= R.s - 2 && y <= R.e + 2 }
+    function jump(y){ if (lenis) lenis.scrollTo(y, { immediate: true, force: true }); else window.scrollTo(0, y) }
+    function go(k){ k = Math.max(0, Math.min(N - 1, k)); K = k; dir = ''; hover = -1; var R = range(); jump(Math.round(R.s + (R.e - R.s) * k / (N - 1))) }
+    if (!reduced){
+      window.addEventListener('scroll', function(){
+        if (!accPinned()) return;
+        var y = window.scrollY, R = range();
+        if (!(y >= R.s - 2 && y <= R.e + 2)){ dir = ''; prevY = y; return }
+        if (prevY < R.s - 2 && !dir) K = 0;
+        else if (prevY > R.e + 2 && !dir) K = N - 1;
+        var want = Math.round(R.s + (R.e - R.s) * K / (N - 1));
+        if (!touch && !(dir === 'up' && y < want) && !(dir === 'down' && y > want) && Math.abs(y - want) > 1) jump(want);
+        prevY = window.scrollY;
+      }, { passive: true });
+      window.addEventListener('wheel', function(e){
+        if (e.ctrlKey || !e.deltaY || !inside()) return;
+        var d = e.deltaY > 0 ? 1 : -1, now = performance.now();
+        if (now - wh.t > 180 || d !== wh.d){ wh.acc = 0; wh.done = false }
+        wh.t = now; wh.d = d;
+        if (!wh.done && ((K === 0 && d < 0) || (K === N - 1 && d > 0))){ dir = d < 0 ? 'up' : 'down'; return }
+        e.preventDefault(); e.stopImmediatePropagation();
+        if (!wh.done){ wh.acc += Math.abs(e.deltaY) * (e.deltaMode === 1 ? 16 : 1); if (wh.acc >= 32){ wh.done = true; go(K + d) } }
+      }, { passive: false, capture: true });
+      stage.addEventListener('touchstart', function(e){
+        dir = '';
+        touch = e.touches.length === 1 && inside() ? { y: e.touches[0].clientY, dy: 0, out: false, t: performance.now() } : null;
+      }, { passive: true });
+      stage.addEventListener('touchmove', function(e){
+        if (!touch) return;
+        var dy = touch.y - e.touches[0].clientY; touch.dy = dy;
+        if (touch.out) return;
+        if (Math.abs(dy) > 4 && ((K === 0 && dy < 0) || (K === N - 1 && dy > 0))){ dir = dy < 0 ? 'up' : 'down'; touch.out = true; return }
+        if (e.cancelable) e.preventDefault();
+      }, { passive: false });
+      var end = function(e){
+        if (touch && !touch.out){
+          var t = e && e.changedTouches && e.changedTouches[0], dy = t ? touch.y - t.clientY : touch.dy, fast = performance.now() - touch.t < 260;
+          if (Math.abs(dy) >= 24 || (fast && Math.abs(dy) >= 10)) go(K + (dy > 0 ? 1 : -1));
+          else if (Math.abs(dy) > 4) go(K);
+        }
+        touch = null;
+      };
+      stage.addEventListener('touchend', end, { passive: true });
+      stage.addEventListener('touchcancel', end, { passive: true });
+    }
+    show(0);
+    return { layout: layout, update: update };
+  }
+  // Projetos → Laboratório: 28,4svh no desktop (96 px no celular) do fim da lista ao título de lá
+  var accPP = makeAcc($('#projetos'), function(desk, SH){
+    var h = $('#laboratorio .lab-head h2');   // .lab-head é position:relative; offsetTop ignora o deslocamento da animação .rv
+    return { want: desk ? SH * .284 : 96, pad: h ? h.offsetTop : 72 };
+  });
+  // Serviços → Contato: 28,4svh até o título no desktop; no celular, 72 px até a foto (o padding das outras seções)
+  var accSK = makeAcc($('#servicos'), function(desk, SH){
+    if (!desk) return { want: 72, pad: 0 };
+    var ct = $('#contato'), t = $('#ct-title');
+    return { want: SH * .284, pad: t ? t.getBoundingClientRect().top - ct.getBoundingClientRect().top : 150 };
+  });
+
+  // laboratório: anel 3D de capas guiado pela rolagem (cada passo de 40svh traz uma capa à frente)
+  var lab = $('#laboratorio'), labTrack = $('.lab-track', lab), labRing = $('.lab-ring', lab), labCards = $$('.lab-card', lab);
+  var labImgs = labCards.map(function(c){ return $('img', c) }), labHead = $('.lab-head', lab);
+  var labCredit = $('.lab-credit', lab), labNum = $('.lab-num b', lab), labSet = $('.lab-set', lab), labLine = $('.lab-line', lab), labIndex = $('.lab-index', lab);
+  var labN = labCards.length, LAB_STEP = 360 / labN, labPin = false, labOn = -1, labA = null, labR = 0, lmx = 0, lmy = 0;
+  root.style.setProperty('--lab-n', labN);
+  labCards.forEach(function(c, i){ c.style.setProperty('--ci', i) });
+  // índice das cenas: mostra a atual e leva até qualquer uma
+  var labBtns = labCards.map(function(c, i){
+    var li = document.createElement('li'), b = document.createElement('button');
+    b.type = 'button';
+    b.innerHTML = '<span>' + ('0' + (i + 1)).slice(-2) + '</span>' + c.getAttribute('data-set');
+    b.addEventListener('click', function(){
+      if (!labPin) return;
+      var y = labTrack.getBoundingClientRect().top + window.scrollY + i / (labN - 1) * (labTrack.offsetHeight - window.innerHeight);
+      if (lenis) lenis.scrollTo(y, { duration: 1.2 }); else window.scrollTo({ top: y, behavior: 'smooth' });
+    });
+    li.appendChild(b); labIndex.appendChild(li);
+    return b;
+  });
+  function labWords(el, text){
+    el.textContent = '';
+    text.split(' ').forEach(function(word, i){
+      var w = document.createElement('span'); w.className = 'w'; w.style.setProperty('--wi', i); w.textContent = word;
+      el.appendChild(w); el.appendChild(document.createTextNode(' '));
+    });
+  }
+  function labShow(i){
+    labOn = i;
+    var c = labCards[i];
+    labCredit.classList.remove('in');
+    labNum.textContent = ('0' + (i + 1)).slice(-2);
+    labWords(labSet, c.getAttribute('data-set'));
+    labWords(labLine, c.getAttribute('data-line'));
+    void labCredit.offsetWidth;            // reinicia a entrada das palavras
+    labCredit.classList.add('in');
+    labBtns.forEach(function(b, j){
+      b.classList.toggle('on', j === i);
+      if (j === i) b.setAttribute('aria-current', 'step'); else b.removeAttribute('aria-current');
+    });
+  }
+  // segmentos de progresso (só aparecem no celular)
+  var labBars = document.createElement('div'); labBars.className = 'lab-bars'; labBars.setAttribute('aria-hidden', 'true');
+  labCards.forEach(function(){ labBars.appendChild(document.createElement('i')) });
+  labCredit.appendChild(labBars);
+  var labBarEls = Array.prototype.slice.call(labBars.children), labMob = false, labStage = $('.lab-stage', lab);
+  function labLayout(){
+    labMob = window.innerWidth <= 800 && !reduced;
+    labPin = (window.innerWidth > 800 && window.innerHeight >= 560 && !reduced) || labMob;
+    root.classList.toggle('lab-pin', labPin);
+    root.classList.toggle('lab-mob', labMob);
+    if (!labPin){
+      labRing.style.transform = '';
+      labCards.forEach(function(c, i){ c.style.opacity = ''; labImgs[i].style.filter = '' });
+      return;
+    }
+    if (labMob){
+      // celular: capa no alto, com espaço embaixo para os créditos e o botão
+      var SH = labStage.clientHeight || window.innerHeight;   // altura do palco (100svh): não muda com a barra do Safari
+      var mw = Math.min(root.clientWidth * .7, (SH - 350) * .75, 300), mh = mw * 4 / 3;
+      labR = mw * 1.05;
+      lab.style.setProperty('--lc-h', mh + 'px');
+      lab.style.setProperty('--lc-w', mw + 'px');
+      lab.style.setProperty('--lc-r', labR + 'px');
+      lab.style.setProperty('--lab-rt', Math.max(16, Math.round(SH * .07)) + 'px');
+      labA = null;
+      return;
+    }
+    var h = Math.min(window.innerHeight * .56, window.innerWidth * .2933), w = h * .75;
+    labR = w * 1.05;                       // raio que deixa um respiro entre as seis capas
+    lab.style.setProperty('--lc-h', h + 'px');
+    lab.style.setProperty('--lc-w', w + 'px');
+    lab.style.setProperty('--lc-r', labR + 'px');
+    root.style.setProperty('--lab-tail', (window.innerHeight - h) / 2 + 'px');   // espaço livre sob a capa: usado em Serviços
+    // colunas laterais: metade da tela menos o anel (≈ 1,1 capa), a margem e um respiro
+    var g = parseFloat(getComputedStyle(labHead).paddingLeft) || 0;
+    lab.style.setProperty('--lc-side', Math.max(180, root.clientWidth / 2 - w * 1.1 - g - 32) + 'px');
+    labA = null;
+  }
+  var smooth = function(a, b, t){ t = clamp((t - a) / (b - a)); return t * t * (3 - 2 * t) };
+  function labTarget(){
+    var H = (labMob && labStage.clientHeight) || window.innerHeight, r = labTrack.getBoundingClientRect();
+    var p = clamp(-r.top / Math.max(1, labTrack.offsetHeight - H)), v = p * (labN - 1);
+    var k = Math.min(Math.floor(v), labN - 2), t = v - k;
+    var enter = clamp((H - r.top) / H);    // giro curto enquanto a seção chega
+    // cada capa para um pouco na frente (smoothstep com platô) antes de dar lugar à próxima
+    return (k + smooth(.22, .78, t)) * LAB_STEP - Math.pow(1 - enter, 3) * 40 + (labMob ? labDrag : 0);
+  }
+  function labFrame(){
+    var target = labTarget();
+    labA = labA === null ? target : labA + (target - labA) * .14;
+    lmx += ((atx || 0) - lmx) * .06; lmy += ((aty || 0) - lmy) * .06;
+    labRing.style.transform = 'translateZ(' + (-labR) + 'px) rotateX(' + (lmy * -6).toFixed(3) + 'deg) rotateY(' + (-labA + lmx * 10).toFixed(3) + 'deg)';
+    labCards.forEach(function(c, i){
+      var d = ((i * LAB_STEP - labA) % 360 + 540) % 360 - 180;   // ângulo até a frente, de −180 a 180
+      var f = Math.cos(d * Math.PI / 180), front = clamp((f - .5) / .5);
+      c.style.opacity = clamp((f + .6) / .6).toFixed(3);
+      labImgs[i].style.filter = 'grayscale(' + (1 - front).toFixed(3) + ') brightness(' + (.55 + .45 * front).toFixed(3) + ')';
+    });
+    var on = Math.max(0, Math.min(labN - 1, Math.round(labA / LAB_STEP)));
+    if (on !== labOn) labShow(on);
+    if (labMob) labBarEls.forEach(function(b, j){ b.style.setProperty('--f', clamp(labA / LAB_STEP - j + 1).toFixed(3)) });
+  }
+  /* celular: cada gesto (toque de 32 px ou mais, ou roda) leva exatamente à capa seguinte ou anterior.
+     Dentro do trecho fixo a rolagem fica presa no passo atual (o impulso do deslize não atravessa as capas);
+     na primeira e na última capa, o gesto para fora libera a página. Mesma lógica da "nazzanTrava". */
+  var labDrag = 0, labK = 0, labDir = '', labPrevY = window.scrollY, labTouch = null, labWT = 0, labWD = 0, labWAcc = 0, labWDone = false;
+  function labRange(){
+    var s = labTrack.getBoundingClientRect().top + window.scrollY, e = s + labTrack.offsetHeight - (labStage.clientHeight || window.innerHeight);
+    return { s: s, e: e, step: (e - s) / (labN - 1) };
+  }
+  function labInside(){ var R = labRange(), y = window.scrollY; return y >= R.s - 2 && y <= R.e + 2 }
+  function labJump(y){ if (lenis) lenis.scrollTo(y, { immediate: true, force: true }); else window.scrollTo(0, y) }
+  function labGo(k){
+    k = Math.max(0, Math.min(labN - 1, k)); labK = k; labDir = '';
+    var R = labRange(); labJump(Math.round(R.s + R.step * k));
+  }
+  window.addEventListener('scroll', function(){
+    var y = window.scrollY;
+    if (!labMob){ labPrevY = y; return }
+    var R = labRange();
+    if (!(y >= R.s - 2 && y <= R.e + 2)){ labDir = ''; labPrevY = y; return }
+    if (labPrevY < R.s - 2 && !labDir) labK = 0;              // entrou por cima
+    else if (labPrevY > R.e + 2 && !labDir) labK = labN - 1;  // entrou por baixo
+    var want = Math.round(R.s + R.step * labK);
+    if (!labTouch && !(labDir === 'up' && y < want) && !(labDir === 'down' && y > want) && Math.abs(y - want) > 1) labJump(want);
+    labPrevY = window.scrollY;
+  }, { passive: true });
+  /* toque: no iPhone o touchmove pode chegar sem poder ser cancelado (quando a página ainda termina o
+     movimento anterior). Por isso a decisão é tomada no fim do gesto, pela distância total do dedo,
+     e não depende de o gesto ter sido bloqueado. Enquanto arrasta, o anel acompanha o dedo (até 0,3 de passo). */
+  labStage.addEventListener('touchstart', function(e){
+    if (!labMob) return;
+    labDir = '';
+    labTouch = e.touches.length === 1 && labInside() ? { y: e.touches[0].clientY, dy: 0, out: false, t: performance.now() } : null;
+  }, { passive: true });
+  labStage.addEventListener('touchmove', function(e){
+    if (!labTouch) return;
+    var dy = labTouch.y - e.touches[0].clientY;
+    labTouch.dy = dy;
+    if (labTouch.out) return;
+    if (Math.abs(dy) > 4 && ((labK === 0 && dy < 0) || (labK === labN - 1 && dy > 0))){
+      labDir = dy < 0 ? 'up' : 'down'; labTouch.out = true; labDrag = 0; return;   // saindo pela ponta: libera a página
+    }
+    if (e.cancelable) e.preventDefault();
+    labDrag = Math.max(-.3, Math.min(.3, dy / 500)) * LAB_STEP;
+  }, { passive: false });
+  function labTouchEnd(e){
+    if (labTouch && !labTouch.out){
+      var t = e && e.changedTouches && e.changedTouches[0], dy = t ? labTouch.y - t.clientY : labTouch.dy;
+      var fast = performance.now() - labTouch.t < 260;
+      labDrag = 0;
+      if (Math.abs(dy) >= 24 || (fast && Math.abs(dy) >= 10)) labGo(labK + (dy > 0 ? 1 : -1));
+      else if (Math.abs(dy) > 4) labGo(labK);   // gesto curto: volta para a capa atual (um toque no botão não mexe em nada)
+    }
+    labTouch = null;
+  }
+  labStage.addEventListener('touchend', labTouchEnd, { passive: true });
+  labStage.addEventListener('touchcancel', labTouchEnd, { passive: true });
+  window.addEventListener('wheel', function(e){
+    if (!labMob || e.ctrlKey || !e.deltaY || !labInside()) return;
+    var d = e.deltaY > 0 ? 1 : -1, now = performance.now();
+    if (now - labWT > 180 || d !== labWD){ labWAcc = 0; labWDone = false }
+    labWT = now; labWD = d;
+    if (!labWDone && ((labK === 0 && d < 0) || (labK === labN - 1 && d > 0))){ labDir = d < 0 ? 'up' : 'down'; return }
+    e.preventDefault(); e.stopImmediatePropagation();
+    if (!labWDone){ labWAcc += Math.abs(e.deltaY) * (e.deltaMode === 1 ? 16 : 1); if (labWAcc >= 32){ labWDone = true; labGo(labK + d) } }
+  }, { passive: false, capture: true });
+
+  (function labLoop(){
+    if (labPin){
+      var r = lab.getBoundingClientRect();
+      if (r.bottom > -50 && r.top < window.innerHeight + 50) labFrame();
+    }
+    requestAnimationFrame(labLoop);
+  })();
+
+  // medidas que dependem do tamanho da janela
+  var hero = $('#inicio');
+  function measure(){
+    accPinSet();
+    accPP.layout(); accSK.layout();
+    labLayout();
+    onScroll();
+  }
+
+  // cruzes da faixa fixa: giram conforme a rolagem, 0,3° por pixel (mesma regra de meermohsin.me)
+  // quando a rolagem para, o + assenta no múltiplo de 90° mais próximo e nunca fica torto
+  var crosses = $$('.hero-bar .cross i'), crossY = window.scrollY, crossA = 0, crossTm = 0;
+  function crossSet(a, settle){
+    crosses.forEach(function(c){
+      c.style.transition = settle ? 'transform .5s cubic-bezier(.215,.61,.355,1)' : 'none';
+      c.style.transform = 'rotate(' + a.toFixed(2) + 'deg)';
+    });
+  }
+
+  var ticking = false;
+  function onScroll(){
+    ticking = false;
+    var y = window.scrollY;
+    if (!reduced && y !== crossY){
+      crossA += (y - crossY) * .3; crossY = y;
+      crossSet(crossA, false);
+      clearTimeout(crossTm);
+      crossTm = setTimeout(function(){ crossA = Math.round(crossA / 90) * 90; crossSet(crossA, true) }, 140);
+    }
+    accPP.update(); accSK.update();
+  }
+  window.addEventListener('scroll', function(){ if (!ticking){ ticking = true; requestAnimationFrame(onScroll) } }, {passive:true});
+  window.addEventListener('resize', measure);
+  window.addEventListener('load', measure);
+  measure();
+
+  // A entrada mantém o retrato e o lettering nas posições da composição.
+  setTimeout(function(){
+    hero.classList.add('ready');
+    // A faixa inferior também entra sem depender da margem do observador de scroll.
+    $$('.rv', hero).concat($$('.hero-bar, .hero-ticks')).forEach(function(el){ el.classList.add('in') });
+  }, 60);
+
+  // cursor de marca
+  var cur = $('#cur');
+  if (fine && !reduced){
+    var curLabel = $('span', cur), tx = 0, ty = 0, cx = 0, cy = 0, started = false;
+    window.addEventListener('mousemove', function(e){
+      tx = e.clientX; ty = e.clientY;
+      if (!started){ started = true; cx = tx; cy = ty; cur.classList.add('on') }
+    }, {passive:true});
+    document.addEventListener('mouseover', function(e){
+      var t = e.target.closest && e.target.closest('[data-cur]');
+      cur.classList.toggle('big', !!t);
+      curLabel.textContent = t ? t.getAttribute('data-cur') : '';
+    });
+    document.addEventListener('mouseleave', function(){ cur.classList.remove('on'); started = false });
+    (function loop(){
+      cx += (tx - cx) * 0.2; cy += (ty - cy) * 0.2;
+      cur.style.transform = 'translate3d(' + cx + 'px,' + cy + 'px,0)';
+      requestAnimationFrame(loop);
+    })();
+  }
+
+  // Chamadas dos projetos e serviços; sem número, levam à seção de contato.
+  if (CONFIG.whatsapp) $$('[data-wa]').forEach(function(a){
+    a.href = 'https://wa.me/' + CONFIG.whatsapp + '?text=' + encodeURIComponent(a.getAttribute('data-wa'));
+    a.target = '_blank'; a.rel = 'noopener';
+  });
+  // Contato: entrada leve quando a seção chega (sem linha de luz desde 21/11/2026).
+  // (o link do botão vem do data-wa acima, com CONFIG.whatsapp)
+  (function(){
+    var ct = $('#contato'), title = $('#ct-title'), cta = $('#ctWa');
+    if (!ct || !title) return;
+    // letras do título em spans (acendem em cascata)
+    // (uma linha pode ter trechos .w, como "merece " + "presença." em laranja: cada trecho é quebrado em letras)
+    $$('.ln', title).forEach(function(ln){
+      var parts = $$('.w', ln); if (!parts.length) parts = [ln];
+      parts.forEach(function(el){
+        var txt = el.textContent; el.textContent = '';
+        Array.from(txt).forEach(function(ch){ var s = document.createElement('span'); s.setAttribute('data-c', ''); s.textContent = ch; el.appendChild(s) });
+      });
+    });
+    var chars = $$('[data-c]', title);
+    function show(){
+      ct.classList.add('in');
+      chars.forEach(function(c, i){ if (!reduced) c.style.animationDelay = (.15 + i * .03).toFixed(2) + 's'; c.setAttribute('data-lit', '') });
+      cta.classList.add('on');
+    }
+    if ('IntersectionObserver' in window && !reduced){
+      new IntersectionObserver(function(en, ob){ if (en[0].isIntersecting){ show(); ob.disconnect() } }, {threshold: .35}).observe(ct);
+    } else show();
+    // harmonia: última régua de Serviços → topo do título = 28,4svh (o .sk desconta este valor)
+    function ctTop(){
+      document.documentElement.style.setProperty('--ct-top', Math.round(title.getBoundingClientRect().top - ct.getBoundingClientRect().top) + 'px');
+    }
+    window.addEventListener('resize', ctTop);
+    window.addEventListener('load', ctTop);
+    (document.fonts ? document.fonts.ready : Promise.resolve()).then(ctTop);
+    ctTop();
+  })();
+})();
+</script>
+</body>
+</html>

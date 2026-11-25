@@ -1,0 +1,5 @@
+/* A leitura continua disponível sem JavaScript e com movimento reduzido. */
+.text-reveal-active [data-reveal-char]{opacity:.28;transition:opacity .2s linear}
+.text-reveal-active [data-reveal-char].is-lit{opacity:1}
+[data-reveal-word]{display:inline-block;white-space:nowrap}
+@media (prefers-reduced-motion:reduce){.text-reveal-active [data-reveal-char]{opacity:1;transition:none}}
